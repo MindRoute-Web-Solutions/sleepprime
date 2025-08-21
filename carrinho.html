@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho - Sleep Prime</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="assets/logo.png" alt="Sleep Prime Logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="produtos/travesseiro.html">Travesseiros</a></li>
+                <li><a href="produtos/colchao.html">Colchões</a></li>
+                <li><a href="produtos/box.html">Boxes</a></li>
+                <li><a href="produtos/cabeceira.html">Cabeceiras</a></li>
+                <li><a href="#">Contato</a></li>
+                <li>
+                    <a href="carrinho.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="cart-page">
+        <div class="container">
+            <h1 class="cart-title"><i class="fas fa-shopping-cart"></i> Seu Carrinho</h1>
+            
+            <div class="cart-content">
+                <!-- Carrinho vazio -->
+                <div class="empty-cart">
+                    <i class="fas fa-box-open"></i>
+                    <h2>Seu carrinho está vazio</h2>
+                    <p>Parece que você ainda não adicionou produtos ao carrinho.</p>
+                    <a href="index.html" class="btn btn-primary">Continuar Comprando</a>
+                </div>
+
+                <!-- Carrinho com itens -->
+                <div class="cart-items">
+                    <!-- Itens serão renderizados dinamicamente via JavaScript -->
+                </div>
+
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span class="subtotal">R$ 0,00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Frete</span>
+                        <span class="shipping">Grátis</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span class="total-price">R$ 0,00</span>
+                    </div>
+                    <button class="checkout-btn btn-primary">Finalizar Compra</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <img src="assets/logo.png" alt="Sleep Prime Logo" class="footer-logo">
+            <p>&copy; 2025 Sleep Prime. Todos os direitos reservados.</p>
+            <div class="mindroute-logo">
+                <a href="https://www.mindroute.com.br" target="_blank">
+                    <img src="assets/mindroute_logo.png" alt="MindRoute Web Solutions Logo">
+                    <p>Desenvolvido por MindRoute Web Solutions</p>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" aria-label="Voltar ao Topo">&#9650;</button>
+
+    <script src="js/main.js"></script>
+    <script src="js/mainresponsive.js"></script>
+    <script src="js/modules/cart.js"></script>
+</body>
+</html>

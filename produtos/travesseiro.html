@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sleep Prime - Produtos de alta tecnologia japonesa para um sono de qualidade.">
+    <title>Sleep Prime - Seu Melhor Sono Começa Aqui</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="../assets/logo.png" alt="Sleep Prime Logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../produtos/travesseiro.html">Travesseiros</a></li>
+                <li><a href="../produtos/colchao.html">Colchões</a></li>
+                <li><a href="../produtos/box.html">Boxes</a></li>
+                <li><a href="../produtos/cabeceira.html">Cabeceiras</a></li>
+                <li><a href="#">Contato</a></li>
+                <li>
+                    <a href="../carrinho.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="product-page">
+        <section class="product-detail">
+            <div class="product-image">
+                <img src="../assets/images/travesseiro_destaque.jpg" alt="Travesseiro ZenTech">
+            </div>
+            <div class="product-info">
+                <h1>Travesseiro ZenTech</h1>
+                <p class="price">R$ 299,90</p>
+                <p class="description">O Travesseiro ZenTech é a fusão perfeita entre a tradição japonesa e a inovação tecnológica. Desenvolvido com espuma de memória de alta densidade e infusão de chá verde, ele se adapta perfeitamente aos contornos da sua cabeça e pescoço, proporcionando um suporte ideal e alívio de pressão. Sua capa removível e lavável, feita de bambu orgânico, garante frescor e higiene. Experimente noites de sono verdadeiramente reparadoras e acorde renovado.</p>
+                <button class="add-to-cart-btn" 
+                        data-product-id="travesseiro-zentech" 
+                        data-product-name="Travesseiro ZenTech" 
+                        data-product-price="299.90"
+                        data-product-image="../../assets/images/travesseiro_destaque.jpg">
+                    Adicionar ao Carrinho
+                </button>
+            </div>
+        </section>
+
+        <section class="related-products">
+            <h2>Produtos Relacionados</h2>
+            <div class="product-grid">
+                <div class="product-item">
+                    <img src="../assets/images/colchao_destaque.jpg" alt="Colchão ConfortFit">
+                    <h3>Colchão ConfortFit</h3>
+                    <p>Suporte perfeito para sua coluna.</p>
+                    <a href="../produtos/colchao.html" class="btn">Ver Detalhes</a>
+                </div>
+                <div class="product-item">
+                    <img src="../assets/images/box_destaque.jpg" alt="Box Elegance">
+                    <h3>Box Elegance</h3>
+                    <p>Design e durabilidade para seu quarto.</p>
+                    <a href="../produtos/box.html" class="btn">Ver Detalhes</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <img src="../assets/logo.png" alt="Sleep Prime Logo" class="footer-logo">
+            <p>&copy; 2025 Sleep Prime. Todos os direitos reservados.</p>
+            <div class="mindroute-logo">
+                <a href="https://www.mindroute.com.br" target="_blank">
+                    <img src="../assets/mindroute_logo.png" alt="MindRoute Web Solutions Logo">
+                    <p>Desenvolvido por MindRoute Web Solutions</p>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" aria-label="Voltar ao Topo">&#9650;</button>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/mainresponsive.js"></script>
+    <script src="../js/modules/cart.js"></script>
+</body>
+</html>
