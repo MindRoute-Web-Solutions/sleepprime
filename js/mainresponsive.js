@@ -1,36 +1,39 @@
-// mainresponsive.js - Ajustes de interações para dispositivos móveis
-
-// Este arquivo pode ser usado para adicionar interações específicas para mobile
-// Por exemplo, se houver necessidade de carregar scripts diferentes ou
-// ajustar comportamentos de elementos apenas em telas menores.
-
+// mainresponsive.js - Ajustes específicos para mobile
 document.addEventListener("DOMContentLoaded", () => {
-    // Exemplo: Detectar se é um dispositivo móvel e fazer algo específico
-    const isMobile = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-    if (isMobile) {
-        console.log("Dispositivo móvel detectado. Ajustes mobile-specifics podem ser aplicados aqui.");
-        // Adicione aqui qualquer lógica JavaScript que seja exclusiva para dispositivos móveis.
-        // Por exemplo, otimizações de performance para animações, ou comportamentos de toque.
+    // Apenas para debugging - pode remover depois
+    console.log("mainresponsive.js carregado - Dispositivo: ", 
+                window.innerWidth <= 768 ? "Mobile" : "Desktop");
+    
+    // Ajustar altura do menu para compensar a barra de endereço mobile
+    if (window.innerWidth <= 768) {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+        
+        // Recalcular quando a orientação mudar
+        window.addEventListener('resize', () => {
+            const newVh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${newVh}px`);
+        });
     }
 
-    // Exemplo de ajuste: fechar o menu hamburguer ao clicar em um link (para mobile)
-    const navLinks = document.querySelectorAll(".nav-links li a");
-    const nav = document.querySelector(".nav-links");
-    const burger = document.querySelector(".burger");
-
-    navLinks.forEach(link => {
-        link.addEventListener("click", () => {
-            if (nav.classList.contains("nav-active")) {
-                nav.classList.remove("nav-active");
-                burger.classList.remove("toggle");
-                // Reset animation for nav links
-                navLinks.forEach((link) => {
-                    link.style.animation = "";
-                });
-            }
+    // Melhorar toque em botões (área de toque mínima de 44px)
+    if (window.innerWidth <= 768) {
+        const touchElements = document.querySelectorAll('.btn, .add-to-cart-btn, .quantity-btn, .dropdown-toggle');
+        touchElements.forEach(el => {
+            el.style.minHeight = '44px';
+            el.style.minWidth = '44px';
         });
-    });
+    }
+
+    // Prevenir zoom em inputs em iOS
+    if (navigator.platform.indexOf('iPhone') > -1 || 
+        navigator.platform.indexOf('iPad') > -1 || 
+        navigator.platform.indexOf('iPod') > -1) {
+        
+        document.addEventListener('touchstart', function (e) {
+            if (e.touches.length > 1) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+    }
 });
-
-

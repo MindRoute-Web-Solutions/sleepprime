@@ -1,14 +1,12 @@
-/* ============================
-   🎨 Estilos Gerais & Variáveis
-   ============================ */
+/* ============================ Estilos Gerais & Variáveis ============================ */
 :root {
-    --primary-color: #FF4500; /* 🔸 Laranja Vivo - usado em CTAs e elementos de destaque */
-    --secondary-color: #DC143C; /* 🔴 Vermelho - usado para erros/avisos */
-    --text-color: #333333; /* ⚫ Preto quase puro - cor principal de texto */
-    --background-light: #FFFFFF; /* ⚪ Branco - fundo padrão claro */
-    --background-dark: #1A1A1A; /* ⚫ Preto - rodapé ou seções escuras */
-    --light-gray: #F0F0F0; /* 🌫 Cinza claro - fundo de seções */
-    --dark-gray: #666666; /* 🌑 Cinza escuro - texto secundário */
+    --primary-color: #FF4500; /* Laranja Vivo - usado em CTAs e elementos de destaque */
+    --secondary-color: #DC143C; /* Vermelho - usado para erros/avisos */
+    --text-color: #333333; /* Preto quase puro - cor principal de texto */
+    --background-light: #FFFFFF; /* Branco - fundo padrão claro */
+    --background-dark: #1A1A1A; /* Preto - rodapé ou seções escuras */
+    --light-gray: #F0F0F0; /* Cinza claro - fundo de seções */
+    --dark-gray: #666666; /* Cinza escuro - texto secundário */
 }
 
 * {
@@ -17,7 +15,7 @@
     box-sizing: border-box;
 }
 
-/* 🌍 Estilo global do site */
+/* ===================== Estilo global do site ========================= */
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
@@ -25,14 +23,14 @@ body {
     background-color: var(--background-light);
 }
 
-/* Centralizador de conteúdo */
+/* ===================== Centralizador de conteúdo ===================== */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* Links padrão */
+/* ===================== Links padrão ===================== */
 a {
     text-decoration: none;
     color: var(--primary-color);
@@ -42,9 +40,7 @@ ul {
     list-style: none;
 }
 
-/* =====================
-   🔘 Botões Gerais
-   ===================== */
+/* ===================== Botões Gerais ===================== */
 .btn {
     display: inline-block;
     background: var(--primary-color);
@@ -62,9 +58,7 @@ ul {
     transform: translateY(-2px);
 }
 
-/* =====================
-   📌 Cabeçalho (Header)
-   ===================== */
+/* ===================== Cabeçalho (Header) ===================== */
 header {
     background: var(--background-light);
     color: var(--text-color);
@@ -77,7 +71,7 @@ header {
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-/* Navegação principal */
+/* ===================== Navegação principal ===================== */
 nav {
     display: flex;
     justify-content: space-between;
@@ -91,7 +85,7 @@ nav .logo img {
     height: 50px;
 }
 
-/* Links do menu */
+/* ===================== Links do menu ===================== */
 .nav-links {
     display: flex;
     align-items: center;
@@ -108,7 +102,7 @@ nav .logo img {
     position: relative;
 }
 
-/* Efeito de sublinhado animado */
+/* ===================== Efeito de sublinhado animado ===================== */
 .nav-links a::after {
     content: '';
     position: absolute;
@@ -126,9 +120,107 @@ nav .logo img {
     left: 0;
 }
 
-/* =====================
-   🛒 Página do Carrinho 
-   ===================== */
+/* ===================== DROPDOWN MENU ===================== */
+
+/* Container do dropdown */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    position: relative;
+    cursor: pointer;
+}
+
+.dropdown-toggle .fa-chevron-right {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+/* Desktop - hover */
+.dropdown:hover .dropdown-toggle .fa-chevron-right {
+    transform: rotate(90deg);
+}
+
+/* ===================== Sublinhado animado para o dropdown ===================== */
+.dropdown-toggle::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 5px;
+    bottom: -5px;
+    left: 0;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.dropdown:hover .dropdown-toggle::after {
+    width: 100%;
+}
+
+/* ===================== Menu dropdown ===================== */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--background-light);
+    min-width: 200px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    padding: 5px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 1000; 
+    border: 1px solid var(--light-gray);
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu li {
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 12px 20px;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.dropdown-menu a:hover {
+    background: var(--light-gray);
+    color: var(--primary-color);
+    border-left-color: var(--primary-color);
+    padding-left: 25px;
+}
+
+/* Indicador visual do dropdown */
+.dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 20px;
+    width: 12px;
+    height: 12px;
+    background: var(--background-light);
+    transform: rotate(45deg);
+    border-top: 1px solid var(--light-gray);
+    border-left: 1px solid var(--light-gray);
+}
+
+/* ===================== Página do Carrinho  ===================== */
 .cart-page {
     padding: 80px 0;
     min-height: 60vh;
@@ -186,7 +278,7 @@ nav .logo img {
     border-radius: 10px;
     margin-bottom: 20px;
     background: white;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
 }
 
 .cart-item:hover {
@@ -250,6 +342,11 @@ nav .logo img {
 
 .quantity-btn:hover {
     background: #e0e0e0;
+    transform: scale(1.1);
+}
+
+.quantity-btn:active {
+    transform: scale(0.95);
 }
 
 .quantity-btn i {
@@ -318,9 +415,7 @@ nav .logo img {
     letter-spacing: 1px;
 }
 
-/* =====================
-   🍔 Menu Mobile (Burger)
-   ===================== */
+/* ===================== Menu Mobile (Burger) ===================== */
 .burger {
     display: none;
     cursor: pointer;
@@ -334,9 +429,7 @@ nav .logo img {
     transition: all 0.3s ease;
 }
 
-/* =====================
-   🖼 Hero Banner / Carrossel
-   ===================== */
+/* ===================== Hero Banner / Carrossel ===================== */
 .hero-banner {
     position: relative;
     height: 600px;
@@ -344,7 +437,7 @@ nav .logo img {
     margin-top: 70px; /* Compensa o header fixo */
 }
 
-/* Slide do carrossel */
+/* ===================== Slide do carrossel ===================== */
 .carousel-slide {
     display: none;
     width: 100%;
@@ -367,7 +460,7 @@ nav .logo img {
     opacity: 1;
 }
 
-/* Conteúdo do slide */
+/* ===================== Conteúdo do slide ===================== */
 .hero-content {
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.5); /* Overlay para legibilidade */
@@ -385,7 +478,7 @@ nav .logo img {
     margin-bottom: 2rem;
 }
 
-/* Navegação do carrossel */
+/* ===================== Navegação do carrossel ===================== */
 .carousel-nav {
     position: absolute;
     bottom: 20px;
@@ -409,9 +502,7 @@ nav .logo img {
     background-color: var(--primary-color);
 }
 
-/* =====================
-   ⭐ Seções de Destaques
-   ===================== */
+/* ===================== Seções de Destaques ===================== */
 .highlights,
 .benefits,
 .cta-digital,
@@ -420,7 +511,7 @@ nav .logo img {
     text-align: center;
 }
 
-/* Títulos principais */
+/* ===================== Títulos principais ===================== */
 .highlights h2,
 .benefits h2,
 .cta-digital h2,
@@ -447,7 +538,7 @@ nav .logo img {
     border-radius: 2px;
 }
 
-/* Grid de produtos/benefícios */
+/* ===================== Grid de produtos/benefícios ===================== */
 .product-grid,
 .benefit-grid {
     display: grid;
@@ -457,7 +548,7 @@ nav .logo img {
     margin: 0 auto;
 }
 
-/* Cartões de produtos e benefícios */
+/* ===================== Cartões de produtos e benefícios ===================== */
 .product-item,
 .benefit-item {
     background: var(--background-light);
@@ -498,7 +589,7 @@ nav .logo img {
     margin-bottom: 20px;
 }
 
-/* Benefícios com ícones */
+/* ===================== Benefícios com ícones ===================== */
 .benefits {
     background-color: var(--light-gray);
 }
@@ -508,9 +599,7 @@ nav .logo img {
     margin-bottom: 15px;
 }
 
-/* =====================
-   📢 CTA Digital
-   ===================== */
+/* ===================== CTA Digital ===================== */
 .cta-digital {
     background: var(--primary-color);
     color: var(--background-light);
@@ -540,9 +629,7 @@ nav .logo img {
     color: var(--primary-color);
 }
 
-/* =====================
-   🛍 Página de Produto
-   ===================== */
+/* ===================== Página de Produto ===================== */
 .product-page {
     padding-top: 100px; /* Ajusta para o header fixo */
 }
@@ -612,9 +699,7 @@ nav .logo img {
     transform: translateY(-2px);
 }
 
-/* =====================
-   🔗 Produtos Relacionados
-   ===================== */
+/* ===================== Produtos Relacionados ===================== */
 .related-products {
     background-color: var(--light-gray);
     padding: 80px 20px;
@@ -624,9 +709,7 @@ nav .logo img {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
-/* =====================
-   ⚫ Rodapé
-   ===================== */
+/* ===================== Rodapé ===================== */
 footer {
     background: var(--background-dark);
     color: var(--background-light);
@@ -665,9 +748,7 @@ footer p {
     font-weight: bold;
 }
 
-/* =====================
-   ⬆ Botão Voltar ao Topo
-   ===================== */
+/* ===================== Botão Voltar ao Topo ===================== */
 .back-to-top {
     display: none; /* Oculto por padrão */
     position: fixed;
@@ -692,9 +773,7 @@ footer p {
     opacity: 0.9;
 }
 
-/* =====================
-   🔔 Notificações
-   ===================== */
+/* ===================== Notificações ===================== */
 .cart-notification {
     position: fixed;
     top: 100px;
@@ -724,9 +803,7 @@ footer p {
     font-weight: bold;
 }
 
-/* =====================
-   🛒 Melhorias no Carrinho
-   ===================== */
+/* ===================== Melhorias no Carrinho ===================== */
 .item-total {
     font-weight: bold;
     font-size: 1.2rem;
@@ -752,16 +829,114 @@ footer p {
     color: var(--dark-gray);
 }
 
-/* 🚫 Esconde o botão no desktop */
+/* ===================== Imagens do Carrinho ===================== */
+.cart-item img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--light-gray);
+    display: block;
+}
+
+.cart-item img[src=""],
+.cart-item img:not([src]) {
+    display: none;
+}
+
+.img-placeholder {
+    width: 120px;
+    height: 120px;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: #999;
+    font-size: 12px;
+    text-align: center;
+    border: 1px dashed #ccc;
+}
+
+/* ===================== Animações do Carrinho ===================== */
+
+.quantity.updating {
+    animation: pulse 0.3s ease;
+}
+
+.cart-count.updating {
+    animation: bounce 0.5s ease;
+}
+
+.quantity-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* ===================== Mensagens rápidas ===================== */
+.cart-message {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 1001;
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.cart-message.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* ===================== Melhoria visual para os botões de quantidade ===================== */
+.quantity-btn {
+    transition: all 0.2s ease;
+}
+
+.quantity-btn:hover {
+    transform: scale(1.1);
+}
+
+/* ===================== Efeito de loading para o carrinho ===================== */
+.cart-loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ===================== Esconde o botão no desktop ===================== */
 @media (min-width: 769px) {
     .back-to-top {
         display: none !important;
     }
 }
 
-/* =====================
-   📱 Ajustes Mobile
-   ===================== */
+/* ===================== Ajustes Mobile ===================== */
 @media (max-width: 768px) {
     .cart-notification {
         top: auto;

@@ -1,4 +1,4 @@
-// cart.js - VERSÃO COMPLETA CORRIGIDA - LINKS FUNCIONANDO
+// cart.js - VERSÃO MELHORADA - EXPERIÊNCIA DO USUÁRIO OTIMIZADA
 class Cart {
     constructor() {
         this.cart = JSON.parse(localStorage.getItem("sleepPrimeCart")) || [];
@@ -12,7 +12,6 @@ class Cart {
     }
 
     fixCartImageUrls() {
-        // MAPEAMENTO COM CAMINHOS RELATIVOS CORRETOS
         const imagensFixas = {
             'travesseiro-zentech': '../assets/images/travesseiro_destaque.jpg',
             'colchao-confortfit': '../assets/images/colchao_destaque.jpg',
@@ -21,11 +20,9 @@ class Cart {
         };
 
         this.cart.forEach(item => {
-            // Se a imagem está errada ou não existe, corrige
             if (!item.image || item.image === 'null' || item.image === 'undefined') {
                 item.image = imagensFixas[item.id];
             }
-            // Garante que é um caminho relativo
             else if (!item.image.startsWith('../') && !item.image.startsWith('http')) {
                 item.image = '../' + item.image;
             }
@@ -49,7 +46,6 @@ class Cart {
     }
 
     addProduct(id, name, price, imageUrl) {
-        // MAPEAMENTO COM CAMINHOS RELATIVOS CORRETOS
         const imagensFixas = {
             'travesseiro-zentech': '../assets/images/travesseiro_destaque.jpg',
             'colchao-confortfit': '../assets/images/colchao_destaque.jpg',
@@ -78,24 +74,72 @@ class Cart {
     }
 
     removeProduct(id) {
-        this.cart = this.cart.filter(item => item.id !== id);
-        this.saveCart();
-        if (window.location.pathname.includes('carrinho.html')) {
-            this.renderCartPage();
-        }
-    }
-
-    updateQuantity(id, newQuantity) {
-        if (newQuantity < 1) return;
-        
-        const product = this.cart.find(item => item.id === id);
-        if (product) {
-            product.quantity = newQuantity;
+        // Adiciona efeito visual antes de remover
+        const itemElement = document.querySelector(`.cart-item[data-product-id="${id}"]`);
+        if (itemElement) {
+            itemElement.style.opacity = '0';
+            itemElement.style.transform = 'translateX(30px)';
+            
+            setTimeout(() => {
+                this.cart = this.cart.filter(item => item.id !== id);
+                this.saveCart();
+                if (window.location.pathname.includes('carrinho.html')) {
+                    this.renderCartPage();
+                }
+            }, 300);
+        } else {
+            this.cart = this.cart.filter(item => item.id !== id);
             this.saveCart();
             if (window.location.pathname.includes('carrinho.html')) {
                 this.renderCartPage();
             }
         }
+    }
+
+    updateQuantity(id, newQuantity) {
+        if (newQuantity < 1) {
+            this.showMessage("A quantidade mínima é 1");
+            return;
+        }
+        
+        const product = this.cart.find(item => item.id === id);
+        if (product) {
+            product.quantity = newQuantity;
+            this.saveCart();
+            
+            // Atualiza visualmente a quantidade com animação
+            const quantityElement = document.querySelector(`.cart-item[data-product-id="${id}"] .quantity`);
+            if (quantityElement) {
+                quantityElement.classList.add('updating');
+                setTimeout(() => {
+                    quantityElement.textContent = newQuantity;
+                    quantityElement.classList.remove('updating');
+                }, 150);
+            }
+            
+            // Atualiza os totais
+            this.updateTotals();
+        }
+    }
+
+    // Novo método para atualizar apenas os totais sem rerenderizar toda a página
+    updateTotals() {
+        if (!window.location.pathname.includes('carrinho.html')) return;
+        
+        const subtotalElement = document.querySelector('.subtotal');
+        const totalElement = document.querySelector('.total-price');
+        
+        const subtotal = this.getTotal();
+        if (subtotalElement) subtotalElement.textContent = `R$ ${subtotal.toFixed(2)}`;
+        if (totalElement) totalElement.textContent = `R$ ${subtotal.toFixed(2)}`;
+        
+        // Atualiza também os totais individuais dos itens
+        this.cart.forEach(item => {
+            const itemTotalElement = document.querySelector(`.cart-item[data-product-id="${item.id}"] .item-total p`);
+            if (itemTotalElement) {
+                itemTotalElement.textContent = `R$ ${(item.price * item.quantity).toFixed(2)}`;
+            }
+        });
     }
 
     saveCart() {
@@ -106,7 +150,12 @@ class Cart {
     updateCartIcon() {
         const totalItems = this.cart.reduce((sum, item) => sum + item.quantity, 0);
         document.querySelectorAll('.cart-count').forEach(el => {
-            el.textContent = totalItems;
+            // Adiciona animação ao atualizar
+            el.classList.add('updating');
+            setTimeout(() => {
+                el.textContent = totalItems;
+                el.classList.remove('updating');
+            }, 150);
         });
     }
 
@@ -120,25 +169,20 @@ class Cart {
     }
 
     showNotification(message) {
-        // Remove notificação existente
         const existingNotification = document.querySelector('.cart-notification');
         if (existingNotification) existingNotification.remove();
         
-        // 🔥 CORREÇÃO IMPLEMENTADA: Detecta automaticamente o caminho correto
         const isProductPage = window.location.pathname.includes('produtos/');
         const cartLink = isProductPage ? '../carrinho.html' : 'carrinho.html';
         
-        // Cria nova notificação
         const notification = document.createElement('div');
         notification.className = 'cart-notification';
         notification.innerHTML = `<span>${message}</span><a href="${cartLink}">Ver Carrinho</a>`;
         
         document.body.appendChild(notification);
         
-        // Mostra a notificação
         setTimeout(() => notification.classList.add('show'), 10);
         
-        // Esconde após 3 segundos
         setTimeout(() => {
             notification.classList.remove('show');
             setTimeout(() => {
@@ -147,6 +191,73 @@ class Cart {
                 }
             }, 300);
         }, 3000);
+    }
+
+    // Novo método para mostrar mensagens rápidas
+    showMessage(message) {
+        const messageElement = document.createElement('div');
+        messageElement.className = 'cart-message';
+        messageElement.textContent = message;
+        
+        document.body.appendChild(messageElement);
+        
+        setTimeout(() => messageElement.classList.add('show'), 10);
+        
+        setTimeout(() => {
+            messageElement.classList.remove('show');
+            setTimeout(() => {
+                if (messageElement.parentNode) {
+                    messageElement.parentNode.removeChild(messageElement);
+                }
+            }, 300);
+        }, 2000);
+    }
+
+    setupQuantityButtons() {
+        const cartItemsContainer = document.querySelector('.cart-items');
+        if (!cartItemsContainer) return;
+        
+        // Botões de aumentar quantidade
+        cartItemsContainer.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const cartItem = e.target.closest('.cart-item');
+                const productId = cartItem.getAttribute('data-product-id');
+                const product = this.cart.find(item => item.id === productId);
+                
+                if (product) {
+                    this.updateQuantity(productId, product.quantity + 1);
+                    
+                    // Efeito visual no botão
+                    btn.classList.add('active');
+                    setTimeout(() => btn.classList.remove('active'), 200);
+                }
+            });
+        });
+        
+        // Botões de diminuir quantidade
+        cartItemsContainer.querySelectorAll('.quantity-btn.minus').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const cartItem = e.target.closest('.cart-item');
+                const productId = cartItem.getAttribute('data-product-id');
+                const product = this.cart.find(item => item.id === productId);
+                
+                if (product) {
+                    this.updateQuantity(productId, product.quantity - 1);
+                    
+                    // Efeito visual no botão
+                    btn.classList.add('active');
+                    setTimeout(() => btn.classList.remove('active'), 200);
+                }
+            });
+        });
+        
+        // Botões de remover
+        cartItemsContainer.querySelectorAll('.remove-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const productId = e.target.closest('.remove-btn').getAttribute('data-id');
+                this.removeProduct(productId);
+            });
+        });
     }
 
     renderCartPage() {
@@ -203,13 +314,20 @@ class Cart {
             
             cartItemsContainer.innerHTML = html;
             
-            // Adiciona event listeners para os botões de remover
-            cartItemsContainer.querySelectorAll('.remove-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const productId = e.target.closest('.remove-btn').getAttribute('data-id');
-                    this.removeProduct(productId);
-                });
+            // Adiciona animação de entrada aos itens
+            const items = cartItemsContainer.querySelectorAll('.cart-item');
+            items.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    item.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, index * 100);
             });
+            
+            // Configura os botões
+            this.setupQuantityButtons();
         }
         
         // Atualiza totais
@@ -223,12 +341,11 @@ class Cart {
         
         this.renderCartPage();
         
-        // Event listener para o botão finalizar compra
         const checkoutBtn = document.querySelector('.checkout-btn');
         if (checkoutBtn) {
             checkoutBtn.addEventListener('click', () => {
                 if (this.cart.length === 0) {
-                    alert('Seu carrinho está vazio!');
+                    this.showMessage('Seu carrinho está vazio!');
                     return;
                 }
                 

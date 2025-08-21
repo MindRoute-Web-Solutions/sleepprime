@@ -143,6 +143,90 @@
         transform: translateX(0%);
     }
 
+    /* =====================
+       📱 DROPDOWN MOBILE
+       ===================== */
+    .dropdown {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .dropdown-toggle {
+        width: 100%;
+        justify-content: center;
+        padding: 15px 0;
+        pointer-events: auto; /* Garante que é clicável */
+    }
+    
+    .dropdown-toggle .fa-chevron-right {
+        margin-left: 5px;
+        transition: transform 0.3s ease;
+    }
+    
+    .dropdown.active .dropdown-toggle .fa-chevron-right {
+        transform: rotate(90deg);
+    }
+
+    
+    .dropdown-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        background: transparent;
+        padding: 0;
+        margin: 0 auto;
+        display: none;
+        width: 80%;
+        border: none;
+        text-align: center;
+    }
+    
+    .dropdown.active .dropdown-menu {
+        display: block;
+        animation: slideDown 0.3s ease;
+    }
+    
+    .dropdown-menu li {
+        margin: 10px 0;
+    }
+    
+    .dropdown-menu a {
+        padding: 12px 15px;
+        border-left: none;
+        border-bottom: 2px solid transparent;
+        font-size: 0.95rem;
+        color: var(--text-color);
+    }
+    
+    .dropdown-menu a:hover {
+        background: rgba(255, 69, 0, 0.1);
+        color: var(--primary-color);
+        border-left: none;
+        border-bottom-color: var(--primary-color);
+        padding-left: 15px;
+    }
+
+    /* Remove o indicador triangular no mobile */
+    .dropdown-menu::before {
+        display: none;
+    }
+    
+    /* Remove o sublinhado animado no mobile */
+    .dropdown-toggle::after {
+        display: none;
+    }
+
+    /* 🔥 CORREÇÃO: Previne que o menu hamburger feche ao clicar no dropdown */
+    .nav-links .dropdown {
+        pointer-events: auto;
+    }
+    
+    .dropdown-toggle {
+        pointer-events: auto;
+    }
+
     /* Cart Icon */
     .cart-icon {
         margin-left: auto;
@@ -179,7 +263,7 @@
         margin-bottom: 30px;
     }
 
-    /* Grids */
+        /* Grids */
     .product-grid,
     .benefit-grid {
         grid-template-columns: 1fr;
@@ -363,6 +447,46 @@
     .checkout-btn {
         padding: 12px;
     }
+
+    /* ===============================
+       📱 Ajustes de Animação para Mobile
+       =============================== */
+    .cart-notification {
+        top: auto;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        transform: translateY(100%);
+    }
+    
+    .cart-notification.show {
+        transform: translateY(0);
+    }
+    
+    .cart-message {
+        width: 90%;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+    
+    .item-total {
+        text-align: left;
+        margin-top: 15px;
+        min-width: auto;
+    }
+    
+    /* Ajustes para animações em mobile */
+    .cart-item {
+        transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    
+    .quantity-btn {
+        transition: transform 0.2s ease;
+    }
+    
+    .quantity-btn:active {
+        transform: scale(0.95);
+    }
 }
 
 /* ===============================
@@ -391,5 +515,19 @@
     to {
         opacity: 1;
         transform: translateX(0px);
+    }
+}
+
+/* ===============================
+   Dropdown Mobile Animation
+   =============================== */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
