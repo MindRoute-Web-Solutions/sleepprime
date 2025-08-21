@@ -127,7 +127,7 @@ class Cart {
         // Cria nova notificação
         const notification = document.createElement('div');
         notification.className = 'cart-notification';
-        notification.innerHTML = `<span>${message}</span><a href="../../carrinho.html">Ver Carrinho</a>`;
+        notification.innerHTML = `<span>${message}</span><a href="carrinho.html">Ver Carrinho</a>`;
         document.body.appendChild(notification);
         
         setTimeout(() => notification.classList.add('show'), 10);
