@@ -1,4 +1,4 @@
-// cart.js - VERSÃO FINAL CORRIGIDA - IMAGENS FUNCIONANDO
+// cart.js - VERSÃO COMPLETA CORRIGIDA - LINKS FUNCIONANDO
 class Cart {
     constructor() {
         this.cart = JSON.parse(localStorage.getItem("sleepPrimeCart")) || [];
@@ -12,12 +12,12 @@ class Cart {
     }
 
     fixCartImageUrls() {
-        // 🔥 CORREÇÃO: Usar caminhos RELATIVOS consistentemente
+        // MAPEAMENTO COM CAMINHOS RELATIVOS CORRETOS
         const imagensFixas = {
-            'travesseiro-zentech': '../../assets/images/travesseiro_destaque.jpg',
-            'colchao-confortfit': '../../assets/images/colchao_destaque.jpg',
-            'box-elegance': '../../assets/images/box_destaque.jpg',
-            'cabeceira-harmony': '../../assets/images/cabeceira_principal.jpg'
+            'travesseiro-zentech': '../assets/images/travesseiro_destaque.jpg',
+            'colchao-confortfit': '../assets/images/colchao_destaque.jpg',
+            'box-elegance': '../assets/images/box_destaque.jpg',
+            'cabeceira-harmony': '../assets/images/cabeceira_principal.jpg'
         };
 
         this.cart.forEach(item => {
@@ -25,13 +25,9 @@ class Cart {
             if (!item.image || item.image === 'null' || item.image === 'undefined') {
                 item.image = imagensFixas[item.id];
             }
-            // Garante que é um caminho relativo consistente
-            else if (item.image.startsWith('/assets/')) {
-                // Converte caminho absoluto para relativo
-                item.image = '../../' + item.image.substring(1);
-            }
-            else if (!item.image.startsWith('../../') && !item.image.startsWith('http')) {
-                item.image = '../../assets/images/' + item.image;
+            // Garante que é um caminho relativo
+            else if (!item.image.startsWith('../') && !item.image.startsWith('http')) {
+                item.image = '../' + item.image;
             }
         });
         
@@ -53,15 +49,15 @@ class Cart {
     }
 
     addProduct(id, name, price, imageUrl) {
-        // 🔥 CORREÇÃO: Usar caminhos RELATIVOS consistentemente
+        // MAPEAMENTO COM CAMINHOS RELATIVOS CORRETOS
         const imagensFixas = {
-            'travesseiro-zentech': '../../assets/images/travesseiro_destaque.jpg',
-            'colchao-confortfit': '../../assets/images/colchao_destaque.jpg',
-            'box-elegance': '../../assets/images/box_destaque.jpg',
-            'cabeceira-harmony': '../../assets/images/cabeceira_principal.jpg'
+            'travesseiro-zentech': '../assets/images/travesseiro_destaque.jpg',
+            'colchao-confortfit': '../assets/images/colchao_destaque.jpg',
+            'box-elegance': '../assets/images/box_destaque.jpg',
+            'cabeceira-harmony': '../assets/images/cabeceira_principal.jpg'
         };
 
-        const imageFinal = imagensFixas[id] || '../../assets/images/produto_indisponivel.jpg';
+        const imageFinal = imagensFixas[id] || '../assets/images/produto_indisponivel.jpg';
 
         const existingProduct = this.cart.find(item => item.id === id);
         
@@ -73,7 +69,7 @@ class Cart {
                 name: name,
                 price: price,
                 quantity: 1,
-                image: imageFinal  // Usa SEMPRE a imagem do mapeamento
+                image: imageFinal
             });
         }
         
@@ -84,7 +80,9 @@ class Cart {
     removeProduct(id) {
         this.cart = this.cart.filter(item => item.id !== id);
         this.saveCart();
-        this.renderCartPage();
+        if (window.location.pathname.includes('carrinho.html')) {
+            this.renderCartPage();
+        }
     }
 
     updateQuantity(id, newQuantity) {
@@ -94,7 +92,9 @@ class Cart {
         if (product) {
             product.quantity = newQuantity;
             this.saveCart();
-            this.renderCartPage();
+            if (window.location.pathname.includes('carrinho.html')) {
+                this.renderCartPage();
+            }
         }
     }
 
@@ -124,21 +124,33 @@ class Cart {
         const existingNotification = document.querySelector('.cart-notification');
         if (existingNotification) existingNotification.remove();
         
+        // 🔥 CORREÇÃO IMPLEMENTADA: Detecta automaticamente o caminho correto
+        const isProductPage = window.location.pathname.includes('produtos/');
+        const cartLink = isProductPage ? '../carrinho.html' : 'carrinho.html';
+        
         // Cria nova notificação
         const notification = document.createElement('div');
         notification.className = 'cart-notification';
-        notification.innerHTML = `<span>${message}</span><a href="carrinho.html">Ver Carrinho</a>`;
+        notification.innerHTML = `<span>${message}</span><a href="${cartLink}">Ver Carrinho</a>`;
+        
         document.body.appendChild(notification);
         
+        // Mostra a notificação
         setTimeout(() => notification.classList.add('show'), 10);
+        
+        // Esconde após 3 segundos
         setTimeout(() => {
             notification.classList.remove('show');
-            setTimeout(() => notification.remove(), 300);
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 300);
         }, 3000);
     }
 
     renderCartPage() {
-        if (!document.querySelector('.cart-items')) return;
+        if (!window.location.pathname.includes('carrinho.html')) return;
         
         const cartItemsContainer = document.querySelector('.cart-items');
         const emptyCartElement = document.querySelector('.empty-cart');
@@ -146,51 +158,61 @@ class Cart {
         const totalElement = document.querySelector('.total-price');
         
         if (this.cart.length === 0) {
-            cartItemsContainer.style.display = 'none';
-            emptyCartElement.style.display = 'block';
+            if (cartItemsContainer) cartItemsContainer.style.display = 'none';
+            if (emptyCartElement) emptyCartElement.style.display = 'block';
             if (subtotalElement) subtotalElement.textContent = 'R$ 0,00';
             if (totalElement) totalElement.textContent = 'R$ 0,00';
             return;
         }
         
-        emptyCartElement.style.display = 'none';
-        cartItemsContainer.style.display = 'block';
-        
-        let html = '';
-        this.cart.forEach(item => {
-            const itemTotal = item.price * item.quantity;
+        if (emptyCartElement) emptyCartElement.style.display = 'none';
+        if (cartItemsContainer) {
+            cartItemsContainer.style.display = 'block';
             
-            html += `
-                <div class="cart-item" data-product-id="${item.id}">
-                    <img src="${item.image}" alt="${item.name}" 
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                         onload="console.log('✅ Imagem carregada: ${item.image}')">
-                    <div class="img-placeholder" style="display: none;">
-                        Imagem<br>Não Carregou
-                    </div>
-                    <div class="item-details">
-                        <h3>${item.name}</h3>
-                        <p class="price">R$ ${item.price.toFixed(2)}</p>
-                        <div class="item-actions">
-                            <div class="quantity-control">
-                                <button class="quantity-btn minus"><i class="fas fa-minus"></i></button>
-                                <span class="quantity">${item.quantity}</span>
-                                <button class="quantity-btn plus"><i class="fas fa-plus"></i></button>
+            let html = '';
+            this.cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                
+                html += `
+                    <div class="cart-item" data-product-id="${item.id}">
+                        <img src="${item.image}" alt="${item.name}" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="img-placeholder" style="display: none;">
+                            Imagem<br>Não Carregou
+                        </div>
+                        <div class="item-details">
+                            <h3>${item.name}</h3>
+                            <p class="price">R$ ${item.price.toFixed(2)}</p>
+                            <div class="item-actions">
+                                <div class="quantity-control">
+                                    <button class="quantity-btn minus"><i class="fas fa-minus"></i></button>
+                                    <span class="quantity">${item.quantity}</span>
+                                    <button class="quantity-btn plus"><i class="fas fa-plus"></i></button>
+                                </div>
+                                <button class="remove-btn" data-id="${item.id}">
+                                    <i class="fas fa-trash"></i> Remover
+                                </button>
                             </div>
-                            <button class="remove-btn" onclick="sleepPrimeCart.removeProduct('${item.id}')">
-                                <i class="fas fa-trash"></i> Remover
-                            </button>
+                        </div>
+                        <div class="item-total">
+                            <p>R$ ${itemTotal.toFixed(2)}</p>
                         </div>
                     </div>
-                    <div class="item-total">
-                        <p>R$ ${itemTotal.toFixed(2)}</p>
-                    </div>
-                </div>
-            `;
-        });
+                `;
+            });
+            
+            cartItemsContainer.innerHTML = html;
+            
+            // Adiciona event listeners para os botões de remover
+            cartItemsContainer.querySelectorAll('.remove-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const productId = e.target.closest('.remove-btn').getAttribute('data-id');
+                    this.removeProduct(productId);
+                });
+            });
+        }
         
-        cartItemsContainer.innerHTML = html;
-        
+        // Atualiza totais
         const subtotal = this.getTotal();
         if (subtotalElement) subtotalElement.textContent = `R$ ${subtotal.toFixed(2)}`;
         if (totalElement) totalElement.textContent = `R$ ${subtotal.toFixed(2)}`;
@@ -198,26 +220,34 @@ class Cart {
 
     setupCartPage() {
         if (!window.location.pathname.includes('carrinho.html')) return;
+        
         this.renderCartPage();
         
-        document.querySelector('.checkout-btn')?.addEventListener('click', () => {
-            if (this.cart.length === 0) {
-                alert('Seu carrinho está vazio!');
-                return;
-            }
-            alert('Compra finalizada com sucesso! Obrigado pela preferência.');
-            this.clearCart();
-            this.renderCartPage();
-        });
+        // Event listener para o botão finalizar compra
+        const checkoutBtn = document.querySelector('.checkout-btn');
+        if (checkoutBtn) {
+            checkoutBtn.addEventListener('click', () => {
+                if (this.cart.length === 0) {
+                    alert('Seu carrinho está vazio!');
+                    return;
+                }
+                
+                alert('Compra finalizada com sucesso! Obrigado pela preferência.');
+                this.clearCart();
+                this.renderCartPage();
+            });
+        }
     }
 }
 
 // Inicializa o carrinho
 const sleepPrimeCart = new Cart();
 
-// Configura a página do carrinho
+// Para a página do carrinho, chama a configuração específica
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => sleepPrimeCart.setupCartPage());
+    document.addEventListener('DOMContentLoaded', () => {
+        sleepPrimeCart.setupCartPage();
+    });
 } else {
     sleepPrimeCart.setupCartPage();
 }
