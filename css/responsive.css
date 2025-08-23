@@ -160,7 +160,7 @@
     }
 
     /* =====================
-       📱 DROPDOWN MOBILE
+       📱 DROPDOWN MOBILE - CORRIGIDO
        ===================== */
     .dropdown {
         width: 100%;
@@ -177,6 +177,11 @@
     .dropdown-toggle .fa-chevron-right {
         margin-left: 5px;
         transition: transform 0.3s ease;
+    }
+    
+    /* CORREÇÃO: Garantir que volte à posição original quando não ativo */
+    .dropdown:not(.active) .dropdown-toggle .fa-chevron-right {
+        transform: rotate(0deg);
     }
     
     .dropdown.active .dropdown-toggle .fa-chevron-right {
@@ -197,11 +202,16 @@
         width: 80%;
         border: none;
         text-align: center;
+        transition: opacity 0.1s ease, max-height 0.1s ease; /* Transição mais rápida */
+        max-height: 0;
+        overflow: hidden;
+        will-change: opacity, max-height; /* Melhora performance */
     }
     
     .dropdown.active .dropdown-menu {
         display: block;
-        animation: slideDown 0.3s ease;
+        max-height: 500px; /* Valor suficiente para conter todos os itens */
+        animation: slideDown 0.1s ease;
     }
     
     .dropdown-menu li {

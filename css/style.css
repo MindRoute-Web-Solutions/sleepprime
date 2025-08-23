@@ -814,6 +814,7 @@ footer {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    position: relative; /* Para posicionamento absoluto da logo MindRoute */
 }
 
 .footer-logo {
@@ -827,18 +828,38 @@ footer p {
     margin-bottom: 10px;
 }
 
+/* ===================== Logo MindRoute - VISÍVEL NO DESKTOP ===================== */
 .mindroute-logo {
-    display: none; /* Escondido no desktop, visível no mobile */
+    display: block; /* Alterado de 'none' para 'block' */
+    position: absolute;
+    right: 5px;
+    bottom: 1.5px;
+    text-align: right;
 }
 
 .mindroute-logo img {
-    height: 40px;
-    margin-top: 15px;
+    height: 120px;
+    margin-bottom: -30px;
+    margin-right: 50px;
 }
 
 .mindroute-logo a {
     color: var(--background-light);
-    font-weight: bold;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.mindroute-logo a:hover {
+    opacity: 0.8;
+}
+
+/* Ajuste para mobile */
+@media (max-width: 768px) {
+    .mindroute-logo {
+        position: static;
+        text-align: center;
+        margin-top: 20px;
+    }
 }
 
 /* ===================== Botão Voltar ao Topo ===================== */
