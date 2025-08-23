@@ -362,15 +362,49 @@
 
     /* Footer */
     footer {
-        padding: 25px 0;
+        padding: 40px 0 20px;
     }
-
-    .footer-logo {
-        height: 50px;
+    
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 0 15px;
     }
-
-    footer p {
-        font-size: 0.85rem;
+    
+    .footer-col {
+        margin-bottom: 25px;
+        text-align: center;
+    }
+    
+    .footer-col h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    .footer-bottom {
+        padding: 20px 15px 0;
+    }
+    
+    .footer-bottom-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .footer-contact li {
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .footer-payments {
+        justify-content: center;
     }
 
     /* Extra Elements */
@@ -379,7 +413,7 @@
     }
 
     .mindroute-logo img {
-        height: 35px;
+        height: 80px;
     }
 
     .back-to-top {
@@ -651,6 +685,38 @@
     
     .cart-summary {
         padding: 15px;
+    }
+
+    .footer-col h3 {
+        font-size: 1.2rem;
+    }
+    
+    .footer-contact li {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+    
+    .footer-contact i {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+    
+    .footer-payments {
+        gap: 10px;
+    }
+    
+    .footer-payments i {
+        font-size: 1.5rem;
+    }
+    
+    .mindroute-logo {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .mindroute-logo img {
+        height: 25px;
     }
 }
 

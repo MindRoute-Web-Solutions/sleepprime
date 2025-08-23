@@ -802,63 +802,249 @@ nav .logo img {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
-/* ===================== Rodapé ===================== */
+/* ===================== RODAPÉ PROFISSIONAL ===================== */
 footer {
     background: var(--background-dark);
     color: var(--background-light);
-    padding: 40px 0;
-    text-align: center;
+    padding: 60px 0 20px;
 }
 
-.footer-content {
+.footer-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    position: relative; /* Para posicionamento absoluto da logo MindRoute */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
 }
 
-.footer-logo {
-    height: 70px;
-    margin-bottom: 20px;
+.footer-col {
+    margin-bottom: 30px;
 }
 
-footer p {
-    font-size: 1rem;
-    color: var(--dark-gray);
-    margin-bottom: 10px;
+.footer-col h3 {
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 10px;
 }
 
-/* ===================== Logo MindRoute - VISÍVEL NO DESKTOP ===================== */
-.mindroute-logo {
-    display: block; /* Alterado de 'none' para 'block' */
+.footer-col h3::after {
+    content: '';
     position: absolute;
-    right: 5px;
-    bottom: 1.5px;
-    text-align: right;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 2px;
+    background: var(--primary-color);
 }
 
-.mindroute-logo img {
-    height: 120px;
-    margin-bottom: -30px;
-    margin-right: 50px;
+.footer-col p {
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #ccc;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: #ccc;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+    transform: translateX(5px);
+}
+
+.footer-contact {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-contact li {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: flex-start;
+    color: #ccc;
+}
+
+.footer-contact i {
+    color: var(--primary-color);
+    margin-right: 10px;
+    font-size: 1.1rem;
+    min-width: 20px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 40px auto 0;
+    padding: 25px 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-bottom-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-bottom p {
+    color: #ccc;
+    margin: 0;
+}
+
+.footer-payments {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footer-payments i {
+    font-size: 1.8rem;
+    color: #ccc;
+    transition: color 0.3s ease;
+}
+
+.footer-payments i:hover {
+    color: var(--primary-color);
+}
+
+.footer-payments img {
+    height: 24px;
+}
+
+.mindroute-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ccc;
 }
 
 .mindroute-logo a {
-    color: var(--background-light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ccc;
     text-decoration: none;
-    transition: opacity 0.3s ease;
+    transition: color 0.3s ease;
 }
 
 .mindroute-logo a:hover {
-    opacity: 0.8;
+    color: var(--primary-color);
 }
 
-/* Ajuste para mobile */
+.mindroute-logo img {
+    height: 100px;
+    width: auto;
+}
+
+.mindroute-logo p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Responsividade do Footer */
 @media (max-width: 768px) {
-    .mindroute-logo {
-        position: static;
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .footer-bottom-content {
+        flex-direction: column;
         text-align: center;
-        margin-top: 20px;
+        gap: 15px;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    .footer-col {
+        text-align: center;
+    }
+    
+    .footer-col h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-col h3 {
+        font-size: 1.2rem;
+    }
+    
+    .footer-contact li {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+    
+    .footer-contact i {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+    
+    .footer-payments {
+        gap: 10px;
+    }
+    
+    .footer-payments i {
+        font-size: 1.5rem;
+    }
+    
+    .mindroute-logo {
+        flex-direction: column;
+        gap: 5px;
     }
 }
 
