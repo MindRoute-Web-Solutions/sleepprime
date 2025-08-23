@@ -151,7 +151,7 @@ nav .logo img {
     position: absolute;
     width: 0%;
     height: 5px;
-    bottom: -5px;
+    bottom: -7px;
     left: 0;
     background: var(--primary-color);
     transition: width 0.3s ease;
@@ -505,7 +505,6 @@ nav .logo img {
 /* ===================== Seções de Destaques ===================== */
 .highlights,
 .benefits,
-.cta-digital,
 .related-products {
     padding: 80px 20px;
     text-align: center;
@@ -514,7 +513,6 @@ nav .logo img {
 /* ===================== Títulos principais ===================== */
 .highlights h2,
 .benefits h2,
-.cta-digital h2,
 .related-products h2 {
     font-size: 2.8rem;
     margin-bottom: 50px;
@@ -525,7 +523,6 @@ nav .logo img {
 
 .highlights h2::after,
 .benefits h2::after,
-.cta-digital h2::after,
 .related-products h2::after {
     content: '';
     position: absolute;
@@ -599,34 +596,130 @@ nav .logo img {
     margin-bottom: 15px;
 }
 
-/* ===================== CTA Digital ===================== */
-.cta-digital {
+/* ===================== SOBRE NÓS ===================== */
+.about-us {
+    background: var(--background-light);
+    color: var(--text-color);
+    padding: 80px 80px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.about-content {
+    flex: 1;
+    min-width: 300px;
+    padding-right: 40px;
+}
+
+.about-image {
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+}
+
+.about-image img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.about-us h2 {
+    color: var(--text-color);
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+}
+
+.about-us h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--text-color);
+    margin: 15px 0 25px;
+}
+
+.about-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* ===================== SEÇÃO DE DÚVIDAS FREQUENTES ===================== */
+.faq-section {
+    padding: 80px 20px;
+    background-color: var(--background-dark);
+}
+
+.faq-section h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--primary-color);
+    font-size: 2.5rem;
+}
+
+.faq-section h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
     background: var(--primary-color);
-    color: var(--background-light);
-    padding: 100px 20px;
+    margin: 15px auto 0;
 }
 
-.cta-digital h2 {
-    color: var(--background-light);
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-.cta-digital h2::after {
-    background: var(--background-light);
+.faq-item {
+    margin-bottom: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: var(--background-light);
 }
 
-.cta-digital p {
-    font-size: 1.4rem;
-    margin-bottom: 40px;
-}
-
-.cta-digital .btn {
-    background: var(--background-light);
+.faq-question {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.1rem;
     color: var(--primary-color);
+    transition: background-color 0.3s ease;
 }
 
-.cta-digital .btn:hover {
-    background: var(--light-gray);
-    color: var(--primary-color);
+.faq-question:hover {
+    background-color: rgba(44, 62, 80, 0.05);
+}
+
+.faq-question i {
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-question i {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 300px;
+}
+
+.faq-answer p {
+    padding: 0 20px 20px;
+    margin: 0;
+    line-height: 1.6;
+    color: var(--text-dark);
 }
 
 /* ===================== Página de Produto ===================== */

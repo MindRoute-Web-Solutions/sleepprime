@@ -188,3 +188,24 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+// Funcionalidade para o accordion de dúvidas frequentes
+document.addEventListener('DOMContentLoaded', function() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        
+        question.addEventListener('click', () => {
+            // Fecha todas as outras FAQs abertas
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item && otherItem.classList.contains('active')) {
+                    otherItem.classList.remove('active');
+                }
+            });
+            
+            // Alterna a FAQ clicada
+            item.classList.toggle('active');
+        });
+    });
+});

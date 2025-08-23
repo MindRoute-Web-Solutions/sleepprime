@@ -14,7 +14,6 @@
 
     .highlights h2,
     .benefits h2,
-    .cta-digital h2,
     .related-products h2 {
         font-size: 2.2rem;
     }
@@ -94,6 +93,23 @@
     
     .quantity-control {
         justify-content: flex-start;
+    }
+
+    /* Sobre Nós - Tablet */
+    .about-us {
+        padding: 60px 40px;
+    }
+    
+    .about-content {
+        padding-right: 30px;
+    }
+    
+    .about-us h2 {
+        font-size: 2.2rem;
+    }
+    
+    .about-content p {
+        font-size: 1rem;
     }
 }
 
@@ -250,20 +266,18 @@
     /* Sections */
     .highlights,
     .benefits,
-    .cta-digital,
     .related-products {
         padding: 40px 15px;
     }
 
     .highlights h2,
     .benefits h2,
-    .cta-digital h2,
     .related-products h2 {
         font-size: 1.8rem;
         margin-bottom: 30px;
     }
 
-        /* Grids */
+    /* Grids */
     .product-grid,
     .benefit-grid {
         grid-template-columns: 1fr;
@@ -290,16 +304,6 @@
     .product-item p,
     .benefit-item p {
         font-size: 0.9rem;
-    }
-
-    /* CTA Section */
-    .cta-digital {
-        padding: 60px 15px;
-    }
-
-    .cta-digital p {
-        font-size: 1.1rem;
-        margin-bottom: 30px;
     }
 
     /* Product Page */
@@ -377,6 +381,50 @@
         font-size: 1.3rem;
         bottom: 15px;
         right: 15px;
+    }
+
+    /* Sobre Nós - Mobile */
+    .about-us {
+        flex-direction: column;
+        text-align: center;
+        padding: 60px 20px;
+    }
+    
+    .about-content {
+        padding-right: 0;
+        margin-bottom: 30px;
+    }
+    
+    .about-us h2::after {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .about-us h2 {
+        font-size: 2rem;
+    }
+    
+    .about-content p {
+        font-size: 1rem;
+    }
+
+    /* FAQ Section - Mobile */
+    .faq-section {
+        padding: 60px 15px;
+    }
+    
+    .faq-section h2 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+    
+    .faq-question {
+        padding: 15px;
+        font-size: 1rem;
+    }
+    
+    .faq-answer p {
+        padding: 0 15px 15px;
     }
 
     /* =====================
@@ -529,5 +577,114 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* ===============================
+   Pequenos dispositivos (max-width: 480px)
+   =============================== */
+@media (max-width: 480px) {
+    .hero-banner {
+        height: 300px;
+    }
+    
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+    
+    .hero-content p {
+        font-size: 0.8rem;
+    }
+    
+    .highlights h2,
+    .benefits h2,
+    .related-products h2,
+    .faq-section h2 {
+        font-size: 1.6rem;
+    }
+    
+    .product-item,
+    .benefit-item {
+        padding: 15px;
+    }
+    
+    .product-item h3,
+    .benefit-item h3 {
+        font-size: 1.2rem;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .about-us {
+        padding: 40px 15px;
+    }
+    
+    .about-us h2 {
+        font-size: 1.8rem;
+    }
+    
+    .faq-question {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+    
+    .cart-title {
+        font-size: 1.8rem;
+    }
+    
+    .cart-item {
+        padding: 12px;
+    }
+    
+    .cart-summary {
+        padding: 15px;
+    }
+}
+
+/* ===============================
+   Ajustes de orientação paisagem em mobile
+   =============================== */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero-banner {
+        height: 280px;
+    }
+    
+    .nav-links {
+        height: calc(100vh - 70px);
+        overflow-y: auto;
+    }
+    
+    .nav-links li {
+        margin: 15px 0;
+    }
+}
+
+/* ===============================
+   Dispositivos com altura muito pequena
+   =============================== */
+@media (max-height: 600px) {
+    .hero-content {
+        padding: 10px;
+    }
+    
+    .hero-content h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .hero-content p {
+        font-size: 0.8rem;
+        margin-bottom: 1rem;
+    }
+    
+    .nav-links {
+        padding-top: 10px;
+    }
+    
+    .nav-links li {
+        margin: 15px 0;
     }
 }
