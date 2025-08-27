@@ -1139,7 +1139,7 @@ footer {
     display: block;
 }
 
-.cart-item img[src="assets/images"],
+.cart-item img[src=""],
 .cart-item img:not([src]) {
     display: none;
 }
