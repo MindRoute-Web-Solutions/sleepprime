@@ -360,62 +360,60 @@
         grid-template-columns: 1fr;
     }
 
-    /* Footer */
-    footer {
-        padding: 40px 0 20px;
-    }
-    
+    /* Footer Responsivo */
     .footer-container {
         grid-template-columns: 1fr;
         gap: 30px;
         padding: 0 15px;
     }
-    
+
     .footer-col {
         margin-bottom: 25px;
         text-align: center;
     }
-    
+
     .footer-col h3::after {
         left: 50%;
         transform: translateX(-50%);
     }
-    
+
     .newsletter-form {
         flex-direction: column;
     }
-    
+
     .social-links {
         justify-content: center;
     }
-    
+
     .footer-bottom {
         padding: 20px 15px 0;
     }
-    
+
     .footer-bottom-content {
         flex-direction: column;
         gap: 15px;
     }
-    
+
     .footer-contact li {
         justify-content: center;
         text-align: center;
     }
-    
+
     .footer-payments {
         justify-content: center;
     }
 
-    /* Extra Elements */
     .mindroute-logo {
         display: block;
+        flex-direction: column;
+        gap: 5px;
     }
 
     .mindroute-logo img {
         height: 80px;
     }
 
+    /* Back-to-top Button */
     .back-to-top {
         display: flex;
         align-items: center;
@@ -540,9 +538,7 @@
         padding: 12px;
     }
 
-    /* ===============================
-       📱 Ajustes de Animação para Mobile
-       =============================== */
+    /* Ajustes Mobile - Animações Carrinho */
     .cart-notification {
         top: auto;
         bottom: 20px;
@@ -581,46 +577,12 @@
     }
 }
 
-/* ===============================
-   Burger Menu Animations
-   =============================== */
-.toggle .line1 {
-    transform: rotate(-45deg) translate(-5px, 6px);
-}
-
-.toggle .line2 {
-    opacity: 0;
-}
-
-.toggle .line3 {
-    transform: rotate(45deg) translate(-5px, -6px);
-}
-
-/* ===============================
-   Nav Links Animation
-   =============================== */
-@keyframes navLinkFade {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0px);
-    }
-}
-
-/* ===============================
-   Dropdown Mobile Animation
-   =============================== */
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+/* =====================
+   Esconde back-to-top no desktop
+   ===================== */
+@media (min-width: 769px) {
+    .back-to-top {
+        display: none !important;
     }
 }
 
@@ -687,6 +649,7 @@
         padding: 15px;
     }
 
+    /* Footer Mobile */
     .footer-col h3 {
         font-size: 1.2rem;
     }
@@ -716,7 +679,7 @@
     }
     
     .mindroute-logo img {
-        height: 25px;
+        height: 70px;
     }
 }
 
@@ -762,5 +725,48 @@
     
     .nav-links li {
         margin: 15px 0;
+    }
+}
+
+/* ===============================
+   Burger Menu Animations
+   =============================== */
+.toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.toggle .line2 {
+    opacity: 0;
+}
+
+.toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* ===============================
+   Nav Links Animation
+   =============================== */
+@keyframes navLinkFade {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+/* ===============================
+   Dropdown Mobile Animation
+   =============================== */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

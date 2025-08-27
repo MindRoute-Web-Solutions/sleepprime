@@ -987,67 +987,6 @@ footer {
     font-size: 0.9rem;
 }
 
-/* Responsividade do Footer */
-@media (max-width: 768px) {
-    .footer-container {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    
-    .footer-bottom-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-    }
-    
-    .newsletter-form {
-        flex-direction: column;
-    }
-    
-    .social-links {
-        justify-content: center;
-    }
-    
-    .footer-col {
-        text-align: center;
-    }
-    
-    .footer-col h3::after {
-        left: 50%;
-        transform: translateX(-50%);
-    }
-}
-
-@media (max-width: 480px) {
-    .footer-col h3 {
-        font-size: 1.2rem;
-    }
-    
-    .footer-contact li {
-        flex-direction: column;
-        text-align: center;
-        align-items: center;
-    }
-    
-    .footer-contact i {
-        margin-right: 0;
-        margin-bottom: 5px;
-    }
-    
-    .footer-payments {
-        gap: 10px;
-    }
-    
-    .footer-payments i {
-        font-size: 1.5rem;
-    }
-    
-    .mindroute-logo {
-        flex-direction: column;
-        gap: 5px;
-    }
-}
-
 /* ===================== Botão Voltar ao Topo ===================== */
 .back-to-top {
     display: none; /* Oculto por padrão */
@@ -1227,32 +1166,4 @@ footer {
 
 @keyframes spin {
     to { transform: rotate(360deg); }
-}
-
-/* ===================== Esconde o botão no desktop ===================== */
-@media (min-width: 769px) {
-    .back-to-top {
-        display: none !important;
-    }
-}
-
-/* ===================== Ajustes Mobile ===================== */
-@media (max-width: 768px) {
-    .cart-notification {
-        top: auto;
-        bottom: 20px;
-        left: 20px;
-        right: 20px;
-        transform: translateY(100%);
-    }
-    
-    .cart-notification.show {
-        transform: translateY(0);
-    }
-    
-    .item-total {
-        text-align: left;
-        margin-top: 15px;
-        min-width: auto;
-    }
 }
