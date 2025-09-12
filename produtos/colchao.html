@@ -17,20 +17,10 @@
             </div>
             <ul class="nav-links">
                 <li><a href="../index.html">Home</a></li>
-                
-                <!-- Menu Dropdown de Produtos -->
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle">Produtos <i class="fas fa-chevron-right"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="../produtos/travesseiro.html">Travesseiros</a></li>
-                        <li><a href="../produtos/colchao.html">Colchões</a></li>
-                        <li><a href="../produtos/box.html">Boxes</a></li>
-                        <li><a href="../produtos/cabeceira.html">Cabeceiras</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Sobre Nós</a></li>
-                <li><a href="#">Dúvidas Frequentes</a></li>
-                <li><a href="#">Contato</a></li>
+                <li><a href="../index.html#produtos">Produtos</a></li>
+                <li><a href="../index.html#about-us">Sobre Nós</a></li>
+                <li><a href="../index.html#faq-section">Dúvidas Frequentes</a></li>
+                <li><a href="../index.html#contact-form">Contato</a></li>
                 <li>
                     <a href="../carrinho.html" class="cart-icon">
                         <i class="fas fa-shopping-cart"></i>
@@ -48,33 +38,82 @@
 
     <main class="product-page">
         <section class="product-detail">
-            <div class="product-image">
-                <img src="../assets/images/colchao_destaque.jpg" alt="Colchão ConfortFit">
+            <div class="product-gallery">
+                <div class="thumbnails">
+                    <div class="thumbnail active" data-image="../assets/images/colchao_destaque.jpg">
+                        <img src="../assets/images/colchao_thumb1.jpg" alt="Colchão ConfortFit - Vista frontal">
+                    </div>
+                    <div class="thumbnail" data-image="../assets/images/colchao_thumb2.jpg">
+                        <img src="../assets/images/colchao_thumb2.jpg" alt="Colchão ConfortFit - Vista lateral">
+                    </div>
+                    <div class="thumbnail" data-image="../assets/images/colchao_thumb3.jpg">
+                        <img src="../assets/images/colchao_thumb3.jpg" alt="Colchão ConfortFit - Detalhe do material">
+                    </div>
+                    <div class="thumbnail" data-image="../assets/images/colchao_thumb4.jpg">
+                        <img src="../assets/images/colchao_thumb4.jpg" alt="Colchão ConfortFit - Conforto superior">
+                    </div>
+                    <div class="thumbnail" data-image="../assets/images/colchao_thumb5.jpg">
+                        <img src="../assets/images/colchao_thumb5.jpg" alt="Colchão ConfortFit - Design ergonômico">
+                    </div>
+                </div>
+                <div class="main-image">
+                    <img src="../assets/images/colchao_destaque.jpg" alt="Colchão ConfortFit" id="zoomed-image">
+                </div>
             </div>
             <div class="product-info">
                 <h1>Colchão ConfortFit</h1>
-                <p class="price">R$ 1.999,90</p>
-                <p class="description">O Colchão ConfortFit é a escolha ideal para quem busca o equilíbrio perfeito entre conforto e suporte. Com camadas de espuma de alta resiliência and molas ensacadas individualmente, ele se adapta aos pontos de pressão do seu corpo, garantindo um alinhamento ideal da coluna. A tecnologia de ventilação japonesa mantém a temperatura ideal durante toda a noite, proporcionando um sono fresco e ininterrupto. Desperte sem dores e com a energia renovada.</p>
-                <button class="add-to-cart-btn" 
+                
+                <div class="pricing">
+                    <p class="old-price">R$ 1.999,90</p>
+                    <p class="installment-price">R$ 1.699,90 em 10x de R$ 169,99 sem juros</p>
+                    <p class="pix-price">ou R$ 1.529,91 no Pix <span class="pix-discount">(10% de desconto no pix)</span></p>
+                </div>
+                
+                <div class="product-actions">
+                    <button class="btn buy-now-btn" 
+                            data-product-id="colchao-confortfit" 
+                            data-product-name="Colchão ConfortFit" 
+                            data-product-price="1699.90">
+                        Comprar Agora
+                    </button>
+                    <button class="add-to-cart-btn" 
                         data-product-id="colchao-confortfit" 
                         data-product-name="Colchão ConfortFit" 
                         data-product-price="1999.90"
                         data-product-image="../assets/images/colchao_destaque.jpg">
-                    Adicionar ao Carrinho
-                </button>
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-description">
+                <h2>Descrição do Produto</h2>
+                <p>O Colchão ConfortFit é a escolha ideal para quem busca o equilíbrio perfeito entre conforto e suporte. Com camadas de espuma de alta resiliência and molas ensacadas individualmente, ele se adapta aos pontos de pressão do seu corpo, garantindo um alinhamento ideal da coluna. A tecnologia de ventilação japonesa mantém a temperatura ideal durante toda a noite, proporcionando um sono fresco e ininterrupto. Desperte sem dores e com a energia renovada.</p>
+            </div>
+
+            <div class="product-features">
+                <h3>Características:</h3>
+                <ul>
+                    <li>Espuma de memória de alta densidade</li>
+                    <li>Infusão de chá verde para frescor natural</li>
+                    <li>Capa de bambu orgânico removível e lavável</li>
+                    <li>Suporte ergonômico para cabeça e pescoço</li>
+                    <li>Tecnologia anti-alérgica</li>
+                    <li>Durabilidade superior (5 anos de garantia)</li>
+                </ul>
             </div>
         </section>
 
         <section class="related-products">
             <h2>Produtos Relacionados</h2>
-            <div class="product-grid">
-                <div class="product-item">
+            <div class="related-product-grid">
+                <div class="related-product-item">
                     <img src="../assets/images/travesseiro_destaque.jpg" alt="Travesseiro ZenTech">
                     <h3>Travesseiro ZenTech</h3>
                     <p>O segredo para um sono profundo e reparador.</p>
                     <a href="../produtos/travesseiro.html" class="btn">Ver Detalhes</a>
                 </div>
-                <div class="product-item">
+                <div class="related-product-item">
                     <img src="../assets/images/box_destaque.jpg" alt="Box Elegance">
                     <h3>Box Elegance</h3>
                     <p>Design e durabilidade para seu quarto.</p>
@@ -92,9 +131,7 @@
             <div class="social-links">
                 <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
 
@@ -118,7 +155,6 @@
                 <li><a href="#">Termos e Condições</a></li>
                 <li><a href="#">Política de Privacidade</a></li>
                 <li><a href="#">Política de Trocas</a></li>
-                <li><a href="#">Trabalhe Conosco</a></li>
             </ul>
         </div>
 

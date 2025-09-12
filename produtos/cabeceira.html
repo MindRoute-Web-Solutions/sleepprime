@@ -17,20 +17,10 @@
             </div>
             <ul class="nav-links">
                 <li><a href="../index.html">Home</a></li>
-                
-                <!-- Menu Dropdown de Produtos -->
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle">Produtos <i class="fas fa-chevron-right"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="../produtos/travesseiro.html">Travesseiros</a></li>
-                        <li><a href="../produtos/colchao.html">Colchões</a></li>
-                        <li><a href="../produtos/box.html">Boxes</a></li>
-                        <li><a href="../produtos/cabeceira.html">Cabeceiras</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Sobre Nós</a></li>
-                <li><a href="#">Dúvidas Frequentes</a></li>
-                <li><a href="#">Contato</a></li>
+                <li><a href="../index.html#produtos">Produtos</a></li>
+                <li><a href="../index.html#about-us">Sobre Nós</a></li>
+                <li><a href="../index.html#faq-section">Dúvidas Frequentes</a></li>
+                <li><a href="../index.html#contact-form">Contato</a></li>
                 <li>
                     <a href="../carrinho.html" class="cart-icon">
                         <i class="fas fa-shopping-cart"></i>
@@ -48,33 +38,83 @@
 
     <main class="product-page">
         <section class="product-detail">
-            <div class="product-image">
-                <img src="../assets/images/cabeceira_principal.jpg" alt="Cabeceira Harmony">
+            <div class="product-gallery">
+                <div class="thumbnails">
+                    <div class="thumbnail active" data-image="../assets/images/cabeceira_principal.jpg">
+                        <img src="../assets/images/cabeceira_thumb1.jpg" alt="Cabeceira Harmony - Vista frontal">
+                    </div>
+                    <div class="thumbnail" data-image="../assets/images/cabeceira_thumb2.jpg">
+                        <img src="../assets/images/cabeceira_thumb2.jpg" alt="Cabeceira Harmony - Vista lateral">
+                    </div>
+                    <div class="thumbnail" data-image="../assets/images/cabeceira_thumb3.jpg">
+                        <img src="../assets/images/cabeceira_thumb3.jpg" alt="Cabeceira Harmony - Detalhe do material">
+                    </div>
+                    <div class="thumbnail" data-image="../assets/images/cabeceira_thumb4.jpg">
+                        <img src="../assets/images/cabeceira_thumb4.jpg" alt="Cabeceira Harmony - Conforto superior">
+                    </div>
+                    <div class="thumbnail" data-image="../assets/images/cabeceira_thumb5.jpg">
+                        <img src="../assets/images/cabeceira_thumb5.jpg" alt="Cabeceira Harmony - Design ergonômico">
+                    </div>
+                </div>
+                <div class="main-image">
+                    <img src="../assets/images/cabeceira_principal.jpg" alt="Cabeceira Harmony" id="zoomed-image">
+                </div>
             </div>
+            
             <div class="product-info">
                 <h1>Cabeceira Harmony</h1>
-                <p class="price">R$ 699,90</p>
-                <p class="description">A Cabeceira Harmony é o toque final de elegância e conforto para o seu quarto. Com design moderno e estofamento macio, ela transforma o ambiente, proporcionando um encosto agradável para leitura ou relaxamento. Disponível em diversas cores e tecidos, adapta-se perfeitamente ao seu estilo. Fácil de instalar e com estrutura robusta, garante durabilidade e beleza por muito tempo.</p>
-                <button class="add-to-cart-btn" 
-                        data-product-id="cabeceira-harmony" 
-                        data-product-name="Cabeceira Harmony" 
-                        data-product-price="699.90"
-                        data-product-image="../assets/images/cabeceira_principal.jpg">
-                    Adicionar ao Carrinho
-                </button>
+                
+                <div class="pricing">
+                    <p class="old-price">R$ 699,00</p>
+                    <p class="installment-price">R$ 599,90 em 10x de R$ 59,99 sem juros</p>
+                    <p class="pix-price">ou R$ 539,99 no Pix <span class="pix-discount">(10% de desconto no pix)</span></p>
+                </div>
+                
+                <div class="product-actions">
+                    <button class="btn buy-now-btn" 
+                            data-product-id="cabeceira-harmony" 
+                            data-product-name="Cabeceira Harmony"
+                            data-product-price="599.90">
+                        Comprar Agora
+                    </button>
+                    <button class="add-to-cart-btn" 
+                            data-product-id="cabeceira-harmony" 
+                            data-product-name="Cabeceira Harmony" 
+                            data-product-price="599.90"
+                            data-product-image="../assets/images/cabeceira_principal.jpg">
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+            </div>
+
+                <div class="product-description">
+                    <h2>Descrição do Produto</h2>
+                    <p>A Cabeceira Harmony é o toque final de elegância e conforto para o seu quarto. Com design moderno e estofamento macio, ela transforma o ambiente, proporcionando um encosto agradável para leitura ou relaxamento. Disponível em diversas cores e tecidos, adapta-se perfeitamente ao seu estilo. Fácil de instalar e com estrutura robusta, garante durabilidade e beleza por muito tempo.</p>
+                </div>
+                
+                <div class="product-features">
+                <h3>Características:</h3>
+                <ul>
+                    <li>Espuma de memória de alta densidade</li>
+                    <li>Infusão de chá verde para frescor natural</li>
+                    <li>Capa de bambu orgânico removível e lavável</li>
+                    <li>Suporte ergonômico para cabeça e pescoço</li>
+                    <li>Tecnologia anti-alérgica</li>
+                    <li>Durabilidade superior (5 anos de garantia)</li>
+                </ul>
             </div>
         </section>
 
         <section class="related-products">
             <h2>Produtos Relacionados</h2>
-            <div class="product-grid">
-                <div class="product-item">
+            <div class="related-product-grid">
+                <div class="related-product-item">
                     <img src="../assets/images/colchao_destaque.jpg" alt="Colchão ConfortFit">
                     <h3>Colchão ConfortFit</h3>
                     <p>Suporte perfeito para sua coluna.</p>
                     <a href="../produtos/colchao.html" class="btn">Ver Detalhes</a>
                 </div>
-                <div class="product-item">
+                <div class="related-product-item">
                     <img src="../assets/images/box_destaque.jpg" alt="Box Elegance">
                     <h3>Box Elegance</h3>
                     <p>Design e durabilidade para seu quarto.</p>
@@ -92,9 +132,7 @@
             <div class="social-links">
                 <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
 
@@ -118,7 +156,6 @@
                 <li><a href="#">Termos e Condições</a></li>
                 <li><a href="#">Política de Privacidade</a></li>
                 <li><a href="#">Política de Trocas</a></li>
-                <li><a href="#">Trabalhe Conosco</a></li>
             </ul>
         </div>
 

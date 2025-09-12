@@ -17,20 +17,10 @@
             </div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                
-                <!-- Menu Dropdown de Produtos -->
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle">Produtos <i class="fas fa-chevron-right"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="produtos/travesseiro.html">Travesseiros</a></li>
-                        <li><a href="produtos/colchao.html">Colchões</a></li>
-                        <li><a href="produtos/box.html">Boxes</a></li>
-                        <li><a href="produtos/cabeceira.html">Cabeceiras</a></li>
-                    </ul>
-                </li>
+                <li><a href="#produtos">Produtos</a></li>
                 <li><a href="#about-us">Sobre Nós</a></li>
                 <li><a href="#faq-section">Dúvidas Frequentes</a></li>
-                <li><a href="#">Contato</a></li>
+                <li><a href="#contact-form">Contato</a></li>
                 <li>
                     <a href="carrinho.html" class="cart-icon">
                         <i class="fas fa-shopping-cart"></i>
@@ -78,31 +68,81 @@
 
         <section class="highlights" id="produtos">
             <h2>Destaques Sleep Prime</h2>
-            <div class="product-grid">
-                <div class="product-item">
-                    <img src="assets/images/travesseiro_destaque.jpg" alt="Travesseiro de Alta Tecnologia">
-                    <h3>Travesseiro ZenTech</h3>
-                    <p>O segredo para um sono profundo e reparador.</p>
-                    <a href="produtos/travesseiro.html" class="btn">Ver Detalhes</a>
+            <div class="carousel-container">
+                <button class="carousel-arrow carousel-arrow-prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="product-carousel">
+                    <div class="product-item">
+                        <img src="assets/images/travesseiro_destaque.jpg" alt="Travesseiro de Alta Tecnologia">
+                        <h3>Travesseiro ZenTech</h3>
+                        <p>Para um sono profundo e reparador.</p>
+                        <p class="price">R$ 664,90</p>
+                        <div class="product-buttons">
+                            <a href="produtos/travesseiro.html" class="btn btn-details">Ver Detalhes</a>
+                            <button class="btn buy-now-btn" 
+                                data-product-id="travesseiro-zentech" 
+                                data-product-name="Travesseiro ZenTech" 
+                                data-product-price="664.90">
+                                Comprar Agora
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <img src="assets/images/colchao_destaque.jpg" alt="Colchão Ortopédico">
+                        <h3>Colchão ConfortFit</h3>
+                        <p>Perfeito para sua coluna, noite após noite.</p>
+                        <p class="price">R$ 1.999,90</p>
+                        <div class="product-buttons">
+                            <a href="produtos/colchao.html" class="btn btn-details">Ver Detalhes</a>
+                            <button class="btn buy-now-btn" 
+                                data-product-id="colchao-confortfit" 
+                                data-product-name="Colchão ConfortFit" 
+                                data-product-price="1699.90">
+                                Comprar Agora
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <img src="assets/images/box_destaque.jpg" alt="Box para Colchão">
+                        <h3>Box Elegance</h3>
+                        <p>Design e durabilidade para seu quarto.</p>
+                        <p class="price">R$ 699,90</p>
+                        <div class="product-buttons">
+                            <a href="produtos/box.html" class="btn btn-details">Ver Detalhes</a>
+                            <button class="btn buy-now-btn" 
+                            data-product-id="box-elegance" 
+                            data-product-name="Box Elegance" 
+                            data-product-price="599.90">
+                            Comprar Agora
+                        </button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <img src="assets/images/cabeceira_principal.jpg" alt="Cabeceira Harmony">
+                        <h3>Cabeceira Harmony</h3>
+                        <p>Elegância e conforto para seu quarto.</p>
+                        <p class="price">R$ 899,90</p>
+                        <div class="product-buttons">
+                            <a href="produtos/cabeceira.html" class="btn btn-details">Ver Detalhes</a>
+                            <button class="btn buy-now-btn" 
+                                data-product-id="cabeceira-harmony" 
+                                data-product-name="Cabeceira Harmony"
+                                data-product-price="599.90">
+                                Comprar Agora
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div class="product-item">
-                    <img src="assets/images/colchao_destaque.jpg" alt="Colchão Ortopédico">
-                    <h3>Colchão ConfortFit</h3>
-                    <p>Suporte perfeito para sua coluna, noite após noite.</p>
-                    <a href="produtos/colchao.html" class="btn">Ver Detalhes</a>
-                </div>
-                <div class="product-item">
-                    <img src="assets/images/box_destaque.jpg" alt="Box para Colchão">
-                    <h3>Box Elegance</h3>
-                    <p>Design e durabilidade para seu quarto.</p>
-                    <a href="produtos/box.html" class="btn">Ver Detalhes</a>
-                </div>
+                <button class="carousel-arrow carousel-arrow-next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
         </section>
 
         <section class="benefits">
             <h2>Benefícios da Tecnologia Japonesa</h2>
-            <div class="benefit-grid">
+            <div class="benefit-carousel">
                 <div class="benefit-item">
                     <i class="fas fa-couch fa-3x benefit-icon"></i>
                     <h3>Conforto Inigualável</h3>
@@ -135,6 +175,45 @@
             </div>
             <div class="about-image">
                 <img src="assets/images/dono.jpg" alt="Fundador da Sleep Prime">
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <h2>O que Nossos Clientes Dizem</h2>
+            <div class="testimonials-container">
+                <div class="testimonial-item">
+                    <div class="testimonial-content">
+                        <div class="testimonial-text">
+                            <p>"Desde que comprei o travesseiro ZenTech, minha qualidade de sono melhorou incrivelmente. Acordo revigorado e sem dores no pescoço. Recomendo muito!"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <h4>Carlos Silva</h4>
+                            <p>São Paulo, SP</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-item">
+                    <div class="testimonial-content">
+                        <div class="testimonial-text">
+                            <p>"O colchão ConfortFit é simplesmente perfeito! Apoio ideal para a coluna e muito confortável. Minhas dores nas costas desapareceram após a primeira semana de uso."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <h4>Marina Oliveira</h4>
+                            <p>Rio de Janeiro, RJ</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-item">
+                    <div class="testimonial-content">
+                        <div class="testimonial-text">
+                            <p>"Comprei o conjunto completo (colchão, box và cabeceira) và estou maravilhada com a qualidade. O quarto ficou lindo e o conforto é incomparável. Entrega rápida e atendimento excelente!"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <h4>Ana Costa</h4>
+                            <p>Belo Horizonte, MG</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -174,7 +253,7 @@
                 </div>
                 <div class="faq-answer">
                     <p>O prazo de entrega varia conforme a região. Em capitais e regiões metropolitanas, 
-                       o prazo é de 5 a 10 dias úteis. Para interior e outras regiões, o prazo pode ser 
+                       o prazo é de 5 a 10 dias úteis. For interior e outras regiões, o prazo pode ser 
                        de 10 a 20 dias úteis. Entregas expressas estão disponíveis para algumas localidades.</p>
                 </div>
             </div>
@@ -199,12 +278,39 @@
                 </div>
                 <div class="faq-answer">
                     <p>Recomendamos a limpeza regular com aspirador de pó e manchas devem ser limpas 
-                       imediatamente com pano úmido e sabão neutro. Evite produtos químicos agressivos. 
+                       imediatamente com pano úmido and sabão neutro. Evite produtos químicos agressivos. 
                        Para colchões, use protetor e aspire mensalmente. Travesseiros devem ser lavados 
                        conforme instruções da etiqueta.</p>
                 </div>
             </div>
         </div>
+        </div>
+    </section>
+
+    <section id="contact-form" class="contact-form">
+        <div class="container">
+            <h2>Entre em Contato</h2>
+            <form class="contact-form-container">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Nome Completo</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Assunto</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensagem</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn">Enviar Mensagem</button>
+            </form>
         </div>
     </section>
 
@@ -218,9 +324,7 @@
             <div class="social-links">
                 <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
 
@@ -244,7 +348,6 @@
                 <li><a href="#">Termos e Condições</a></li>
                 <li><a href="#">Política de Privacidade</a></li>
                 <li><a href="#">Política de Trocas</a></li>
-                <li><a href="#">Trabalhe Conosco</a></li>
             </ul>
         </div>
 
