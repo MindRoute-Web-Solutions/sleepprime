@@ -658,6 +658,42 @@ window.addEventListener('resize', setupQualityCarousel);
         });
     }
 
+    // Footer Accordion para Mobile
+    function setupFooterAccordion() {
+        if (window.innerWidth > 768) return;
+        
+        const footerCols = document.querySelectorAll('.footer-col:not(:first-child)');
+        
+        footerCols.forEach(col => {
+            const heading = col.querySelector('h3');
+            const content = col.querySelector('.footer-links, .footer-contact');
+            
+            if (heading && content) {
+                // Fechar todos inicialmente (exceto o primeiro)
+                content.style.maxHeight = '0';
+                
+                heading.addEventListener('click', () => {
+                    // Fechar outras colunas abertas
+                    footerCols.forEach(otherCol => {
+                        if (otherCol !== col && otherCol.classList.contains('active')) {
+                            otherCol.classList.remove('active');
+                            const otherContent = otherCol.querySelector('.footer-links, .footer-contact');
+                            if (otherContent) otherContent.style.maxHeight = '0';
+                        }
+                    });
+                    
+                    // Alternar coluna atual
+                    col.classList.toggle('active');
+                    if (col.classList.contains('active')) {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    } else {
+                        content.style.maxHeight = '0';
+                    }
+                });
+            }
+        });
+    }
+
     // Inicializar todas as funcionalidades
     setupProductCarousel();
     setupBenefitsCarousel();
@@ -667,6 +703,7 @@ window.addEventListener('resize', setupQualityCarousel);
     setupContactForm();
     setupBuyNowButtons();
     setupQualityCarousel();
+    setupFooterAccordion();
     
     // Reconfigurar ao redimensionar a janela
     window.addEventListener('resize', () => {
@@ -676,6 +713,24 @@ window.addEventListener('resize', setupQualityCarousel);
         setupBenefitsCarousel();
         setupTestimonialsCarousel();
         setupQualityCarousel();
+        
+        // Footer accordion no resize
+        const footerCols = document.querySelectorAll('.footer-col');
+        
+        if (window.innerWidth > 768) {
+            // Desktop - remover accordion
+            footerCols.forEach(col => {
+                col.classList.remove('active');
+                const content = col.querySelector('.footer-links, .footer-contact');
+                if (content) {
+                    content.style.maxHeight = '';
+                    content.style.overflow = '';
+                }
+            });
+        } else {
+            // Mobile - aplicar accordion
+            setupFooterAccordion();
+        }
     });
 });
 

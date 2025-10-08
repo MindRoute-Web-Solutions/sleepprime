@@ -1480,3 +1480,68 @@
         margin-top: 0;
     }
 }
+
+/* ===============================
+   FOOTER ACCORDION MOBILE
+   =============================== */
+@media (max-width: 768px) {
+    .footer-col h3 {
+        position: relative;
+        cursor: pointer;
+        padding-right: 30px;
+        margin-bottom: 15px;
+    }
+    
+    .footer-col h3::after {
+        content: '+';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.2rem;
+        font-weight: normal;
+        transition: transform 0.3s ease;
+    }
+    
+    .footer-col.active h3::after {
+        content: '-';
+    }
+    
+    .footer-col .footer-links,
+    .footer-col .footer-contact {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+    
+    .footer-col.active .footer-links,
+    .footer-col.active .footer-contact {
+        max-height: 500px;
+    }
+    
+    /* Manter o primeiro item (logo) sempre visível */
+    .footer-col:first-child h3::after {
+        display: none;
+    }
+    
+    .footer-col:first-child .footer-links,
+    .footer-col:first-child .footer-contact,
+    .footer-col:first-child p,
+    .footer-col:first-child .social-links {
+        max-height: none !important;
+        overflow: visible !important;
+    }
+}
+
+/* Ajustes específicos para mobile muito pequeno */
+@media (max-width: 480px) {
+    .footer-col h3 {
+        font-size: 1.1rem;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .footer-col.active h3 {
+        border-bottom-color: var(--primary-color);
+    }
+}

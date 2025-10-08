@@ -44,4 +44,14 @@ document.addEventListener("DOMContentLoaded", () => {
         // Adicionar polyfill se necessário
         console.log("Scroll suave não suportado nativamente");
     }
+
+    // Footer accordion para mobile
+    function initFooterAccordion() {
+        if (window.innerWidth <= 768) {
+            console.log("Footer accordion ativado para mobile");
+        }
+    }
+
+    // Chamar quando o DOM estiver pronto
+    initFooterAccordion();
 });
