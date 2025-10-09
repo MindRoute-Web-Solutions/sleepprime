@@ -157,5 +157,15 @@
     <script src="js/main.js"></script>
     <script src="js/mainresponsive.js"></script>
     <script src="js/modules/cart.js"></script>
+    <script>
+        // Inicialização extra para garantir o footer accordion
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                if (typeof setupFooterAccordion === 'function') {
+                    setupFooterAccordion();
+                }
+            }, 100);
+        });
+    </script>
 </body>
 </html>

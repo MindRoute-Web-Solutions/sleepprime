@@ -331,68 +331,49 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Carrossel automático para Qualidade Sleep Prime (mobile)
-function setupQualityCarousel() {
-    const qualityFeatures = document.querySelector('.quality-features');
-    if (!qualityFeatures || window.innerWidth > 768) return;
-    
-    // SOLUÇÃO NOVA: Garantir que a primeira imagem aparece completa
-    const ensureFirstImageVisible = () => {
-        setTimeout(() => {
-            // Força o scroll para o início imediatamente
-            qualityFeatures.scrollLeft = 0;
-            
-            // Confirma após um pequeno delay
-            setTimeout(() => {
-                if (qualityFeatures.scrollLeft !== 0) {
-                    qualityFeatures.scrollTo({ left: 0, behavior: 'auto' });
-                }
-                
-                // Verifica se o primeiro item está visível
-                const firstItem = document.querySelector('.quality-item');
-                if (firstItem) {
-                    const firstItemRect = firstItem.getBoundingClientRect();
-                    const containerRect = qualityFeatures.getBoundingClientRect();
-                    
-                    // Se o primeiro item não estiver completamente visível à esquerda
-                    if (firstItemRect.left < containerRect.left) {
-                        firstItem.scrollIntoView({ 
-                            behavior: 'auto', 
-                            inline: 'start',
-                            block: 'nearest'
-                        });
-                    }
-                }
-            }, 50);
-        }, 100);
-    };
-    
-    // Executar assim que o carrossel estiver pronto
-    ensureFirstImageVisible();
-    
-    // Também executar quando a janela for redimensionada
-    window.addEventListener('resize', ensureFirstImageVisible);
-    
-    // Seu código original para o carrossel automático
-    let scrollInterval = setInterval(() => {
-        const itemWidth = document.querySelector('.quality-item').offsetWidth + 15;
-        const maxScroll = qualityFeatures.scrollWidth - qualityFeatures.clientWidth;
-        const currentScroll = qualityFeatures.scrollLeft;
+    function setupQualityCarousel() {
+        const qualityFeatures = document.querySelector('.quality-features');
+        if (!qualityFeatures || window.innerWidth > 768) return;
         
-        if (currentScroll >= maxScroll - 10) {
-            qualityFeatures.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-            qualityFeatures.scrollBy({ left: itemWidth, behavior: 'smooth' });
-        }
-    }, 5000);
-
-    // Pausar carousel quando o usuário interagir
-    qualityFeatures.addEventListener('touchstart', () => {
-        clearInterval(scrollInterval);
-    });
-    
-    qualityFeatures.addEventListener('touchend', () => {
-        // Recriar o intervalo
-        scrollInterval = setInterval(() => {
+        // SOLUÇÃO NOVA: Garantir que a primeira imagem aparece completa
+        const ensureFirstImageVisible = () => {
+            setTimeout(() => {
+                // Força o scroll para o início imediatamente
+                qualityFeatures.scrollLeft = 0;
+                
+                // Confirma após um pequeno delay
+                setTimeout(() => {
+                    if (qualityFeatures.scrollLeft !== 0) {
+                        qualityFeatures.scrollTo({ left: 0, behavior: 'auto' });
+                    }
+                    
+                    // Verifica se o primeiro item está visível
+                    const firstItem = document.querySelector('.quality-item');
+                    if (firstItem) {
+                        const firstItemRect = firstItem.getBoundingClientRect();
+                        const containerRect = qualityFeatures.getBoundingClientRect();
+                        
+                        // Se o primeiro item não estiver completamente visível à esquerda
+                        if (firstItemRect.left < containerRect.left) {
+                            firstItem.scrollIntoView({ 
+                                behavior: 'auto', 
+                                inline: 'start',
+                                block: 'nearest'
+                            });
+                        }
+                    }
+                }, 50);
+            }, 100);
+        };
+        
+        // Executar assim que o carrossel estiver pronto
+        ensureFirstImageVisible();
+        
+        // Também executar quando a janela for redimensionada
+        window.addEventListener('resize', ensureFirstImageVisible);
+        
+        // Seu código original para o carrossel automático
+        let scrollInterval = setInterval(() => {
             const itemWidth = document.querySelector('.quality-item').offsetWidth + 15;
             const maxScroll = qualityFeatures.scrollWidth - qualityFeatures.clientWidth;
             const currentScroll = qualityFeatures.scrollLeft;
@@ -403,25 +384,32 @@ function setupQualityCarousel() {
                 qualityFeatures.scrollBy({ left: itemWidth, behavior: 'smooth' });
             }
         }, 5000);
-    });
-    
-    // Adicionar também para o evento de scroll manual
-    qualityFeatures.addEventListener('scroll', () => {
-        clearInterval(scrollInterval);
-    });
-}
 
-// Garantir que a função seja chamada quando a página carregar
-document.addEventListener('DOMContentLoaded', function() {
-    // Chamar a função diretamente
-    setupQualityCarousel();
-    
-    // E também chamar após um delay para garantir que tudo carregou
-    setTimeout(setupQualityCarousel, 1000);
-});
-
-// Adicionar ao redimensionamento da janela também
-window.addEventListener('resize', setupQualityCarousel);
+        // Pausar carousel quando o usuário interagir
+        qualityFeatures.addEventListener('touchstart', () => {
+            clearInterval(scrollInterval);
+        });
+        
+        qualityFeatures.addEventListener('touchend', () => {
+            // Recriar o intervalo
+            scrollInterval = setInterval(() => {
+                const itemWidth = document.querySelector('.quality-item').offsetWidth + 15;
+                const maxScroll = qualityFeatures.scrollWidth - qualityFeatures.clientWidth;
+                const currentScroll = qualityFeatures.scrollLeft;
+                
+                if (currentScroll >= maxScroll - 10) {
+                    qualityFeatures.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    qualityFeatures.scrollBy({ left: itemWidth, behavior: 'smooth' });
+                }
+            }, 5000);
+        });
+        
+        // Adicionar também para o evento de scroll manual
+        qualityFeatures.addEventListener('scroll', () => {
+            clearInterval(scrollInterval);
+        });
+    }
 
     // Carousel automático de Depoimentos (mobile)
     function setupTestimonialsCarousel() {
@@ -658,27 +646,62 @@ window.addEventListener('resize', setupQualityCarousel);
         });
     }
 
-    // Footer Accordion para Mobile
+    // Footer Accordion para Mobile - VERSÃO MELHORADA
     function setupFooterAccordion() {
-        if (window.innerWidth > 768) return;
+        console.log('Inicializando footer accordion...');
+        
+        if (window.innerWidth > 768) {
+            // Desktop - garantir que tudo está visível
+            const footerCols = document.querySelectorAll('.footer-col');
+            footerCols.forEach(col => {
+                col.classList.remove('active');
+                const content = col.querySelector('.footer-links, .footer-contact');
+                if (content) {
+                    content.style.maxHeight = '';
+                    content.style.overflow = '';
+                }
+            });
+            return;
+        }
         
         const footerCols = document.querySelectorAll('.footer-col:not(:first-child)');
+        console.log('Footer columns encontradas:', footerCols.length);
         
+        // Remover todos os event listeners existentes primeiro
         footerCols.forEach(col => {
+            const heading = col.querySelector('h3');
+            if (heading) {
+                heading.replaceWith(heading.cloneNode(true));
+            }
+        });
+        
+        // Re-selecionar os elementos após o clone
+        const refreshedFooterCols = document.querySelectorAll('.footer-col:not(:first-child)');
+        
+        refreshedFooterCols.forEach(col => {
             const heading = col.querySelector('h3');
             const content = col.querySelector('.footer-links, .footer-contact');
             
             if (heading && content) {
                 // Fechar todos inicialmente (exceto o primeiro)
-                content.style.maxHeight = '0';
+                if (!col.classList.contains('active')) {
+                    content.style.maxHeight = '0';
+                } else {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
                 
-                heading.addEventListener('click', () => {
+                // Adicionar event listener
+                heading.addEventListener('click', function() {
+                    console.log('Footer accordion clicado');
+                    
                     // Fechar outras colunas abertas
-                    footerCols.forEach(otherCol => {
+                    refreshedFooterCols.forEach(otherCol => {
                         if (otherCol !== col && otherCol.classList.contains('active')) {
                             otherCol.classList.remove('active');
                             const otherContent = otherCol.querySelector('.footer-links, .footer-contact');
-                            if (otherContent) otherContent.style.maxHeight = '0';
+                            if (otherContent) {
+                                otherContent.style.maxHeight = '0';
+                            }
                         }
                     });
                     
@@ -693,6 +716,9 @@ window.addEventListener('resize', setupQualityCarousel);
             }
         });
     }
+
+    // Expor a função globalmente para acesso externo
+    window.setupFooterAccordion = setupFooterAccordion;
 
     // Inicializar todas as funcionalidades
     setupProductCarousel();

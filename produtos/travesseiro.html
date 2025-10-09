@@ -234,10 +234,32 @@
         </div>
     </footer>
 
-    <button class="back-to-top" aria-label="Voltar ao Topo">&#9650;</button>
+        <button class="back-to-top" aria-label="Voltar ao Topo">&#9650;</button>
 
     <script src="../js/main.js"></script>
     <script src="../js/mainresponsive.js"></script>
     <script src="../js/modules/cart.js"></script>
+    <script>
+        // Inicialização específica para páginas de produto
+        document.addEventListener('DOMContentLoaded', function() {
+            // Forçar inicialização do footer accordion
+            setTimeout(function() {
+                if (typeof setupFooterAccordion === 'function') {
+                    setupFooterAccordion();
+                }
+                
+                // Re-inicializar se estiver em mobile
+                if (window.innerWidth <= 768) {
+                    const footerCols = document.querySelectorAll('.footer-col:not(:first-child)');
+                    footerCols.forEach(col => {
+                        const content = col.querySelector('.footer-links, .footer-contact');
+                        if (content && !col.classList.contains('active')) {
+                            content.style.maxHeight = '0';
+                        }
+                    });
+                }
+            }, 100);
+        });
+    </script>
 </body>
 </html>
