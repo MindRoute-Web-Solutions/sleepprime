@@ -1488,23 +1488,54 @@
     .footer-col h3 {
         position: relative;
         cursor: pointer;
-        padding-right: 30px;
+        padding-right: 35px;
+        padding-bottom: 8px;
         margin-bottom: 15px;
+        display: inline-block;
+        text-align: left;
+        width: 100%;
     }
     
     .footer-col h3::after {
         content: '+';
         position: absolute;
-        right: 0;
+        right: 10px;
         top: 50%;
         transform: translateY(-50%);
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         font-weight: normal;
-        transition: transform 0.3s ease;
+        transition: all 0.3s ease;
+        background: none;
+        width: auto;
+        height: auto;
     }
     
     .footer-col.active h3::after {
         content: '-';
+    }
+    
+    /* Sublinhado apenas na primeira palavra */
+    .footer-col h3::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        background: var(--primary-color);
+        transition: width 0.3s ease;
+    }
+    
+    /* Ajuste para cada título específico - primeira palavra */
+    .footer-col:nth-child(2) h3::before {
+        width: 45px; /* "Links" */
+    }
+    
+    .footer-col:nth-child(3) h3::before {
+        width: 85px; /* "Institucional" */
+    }
+    
+    .footer-col:nth-child(4) h3::before {
+        width: 60px; /* "Contato" */
     }
     
     .footer-col .footer-links,
@@ -1520,7 +1551,8 @@
     }
     
     /* Manter o primeiro item (logo) sempre visível */
-    .footer-col:first-child h3::after {
+    .footer-col:first-child h3::after,
+    .footer-col:first-child h3::before {
         display: none;
     }
     
@@ -1531,17 +1563,66 @@
         max-height: none !important;
         overflow: visible !important;
     }
+    
+    /* Ajuste de alinhamento */
+    .footer-col:not(:first-child) {
+        text-align: left;
+    }
 }
 
 /* Ajustes específicos para mobile muito pequeno */
 @media (max-width: 480px) {
     .footer-col h3 {
         font-size: 1.1rem;
-        padding: 10px 0;
+        padding: 12px 35px 10px 0;
         border-bottom: 1px solid rgba(255,255,255,0.1);
     }
     
     .footer-col.active h3 {
-        border-bottom-color: var(--primary-color);
+        border-bottom-color: rgba(255,255,255,0.2);
+    }
+    
+    /* Ajuste fino das larguras do sublinhado para mobile pequeno */
+    .footer-col:nth-child(2) h3::before {
+        width: 40px; /* "Links" */
+    }
+    
+    .footer-col:nth-child(3) h3::before {
+        width: 75px; /* "Institucional" */
+    }
+    
+    .footer-col:nth-child(4) h3::before {
+        width: 55px; /* "Contato" */
+    }
+    
+    .footer-col h3::after {
+        right: 12px;
+        font-size: 1.2rem;
+    }
+}
+
+/* Ajustes para mobile muito pequeno */
+@media (max-width: 360px) {
+    .footer-col h3 {
+        font-size: 1rem;
+        padding: 10px 30px 8px 0;
+    }
+    
+    /* Ajuste mais fino das larguras do sublinhado */
+    .footer-col:nth-child(2) h3::before {
+        width: 35px; /* "Links" */
+    }
+    
+    .footer-col:nth-child(3) h3::before {
+        width: 65px; /* "Institucional" */
+    }
+    
+    .footer-col:nth-child(4) h3::before {
+        width: 50px; /* "Contato" */
+    }
+    
+    .footer-col h3::after {
+        right: 10px;
+        font-size: 1.1rem;
     }
 }
