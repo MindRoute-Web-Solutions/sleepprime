@@ -31,9 +31,29 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     
-    // Executar na carga e no redimensionamento
-    detectMobile();
-    window.addEventListener('resize', detectMobile);
+    // Função para centralizar o primeiro produto relacionado
+    function centerFirstRelatedProduct() {
+        if (window.innerWidth > 768) return;
+        
+        const relatedGrid = document.querySelector('.related-product-grid');
+        if (!relatedGrid) return;
+        
+        setTimeout(() => {
+            const firstItem = relatedGrid.querySelector('.related-product-item');
+            if (firstItem && relatedGrid.scrollLeft === 0) {
+                const containerWidth = relatedGrid.clientWidth;
+                const itemWidth = firstItem.offsetWidth;
+                const scrollPosition = (itemWidth - containerWidth) / 2;
+                
+                if (scrollPosition > 0) {
+                    relatedGrid.scrollTo({
+                        left: scrollPosition,
+                        behavior: 'auto'
+                    });
+                }
+            }
+        }, 150);
+    }
     
     // Footer accordion para mobile - inicialização garantida
     function initFooterAccordion() {
@@ -71,11 +91,39 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // Verificar e aplicar estilos para produtos relacionados em mobile
+    function checkRelatedProductsLayout() {
+        const relatedGrid = document.querySelector('.related-product-grid');
+        if (!relatedGrid) return;
+        
+        if (window.innerWidth <= 768) {
+            // Garantir que está como carrossel horizontal
+            relatedGrid.style.display = 'flex';
+            relatedGrid.style.flexWrap = 'nowrap';
+        } else {
+            // Voltar ao grid normal
+            relatedGrid.style.display = 'grid';
+            relatedGrid.style.flexWrap = '';
+        }
+    }
+
+    // Executar na carga e no redimensionamento
+    detectMobile();
+    window.addEventListener('resize', detectMobile);
+    
     // Inicializar footer accordion após um delay para garantir que o DOM está pronto
     setTimeout(initFooterAccordion, 300);
     
     // Também inicializar quando a página estiver completamente carregada
     window.addEventListener('load', initFooterAccordion);
+    
+    // Verificar layout dos produtos relacionados
+    setTimeout(checkRelatedProductsLayout, 100);
+    window.addEventListener('resize', checkRelatedProductsLayout);
+    
+    // Centralizar primeiro produto relacionado
+    setTimeout(centerFirstRelatedProduct, 200);
+    window.addEventListener('resize', centerFirstRelatedProduct);
     
     // Prevenir zoom no campo de input em iOS
     if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {

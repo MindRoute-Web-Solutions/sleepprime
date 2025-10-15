@@ -330,49 +330,29 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Carrossel automático para Qualidade Sleep Prime (mobile)
+    // Carrossel automático para Qualidade Sleep Prime (mobile) - MODIFICADA
     function setupQualityCarousel() {
         const qualityFeatures = document.querySelector('.quality-features');
-        if (!qualityFeatures || window.innerWidth > 768) return;
+        if (!qualityFeatures) return;
         
-        // SOLUÇÃO NOVA: Garantir que a primeira imagem aparece completa
-        const ensureFirstImageVisible = () => {
-            setTimeout(() => {
-                // Força o scroll para o início imediatamente
-                qualityFeatures.scrollLeft = 0;
-                
-                // Confirma após um pequeno delay
-                setTimeout(() => {
-                    if (qualityFeatures.scrollLeft !== 0) {
-                        qualityFeatures.scrollTo({ left: 0, behavior: 'auto' });
-                    }
-                    
-                    // Verifica se o primeiro item está visível
-                    const firstItem = document.querySelector('.quality-item');
-                    if (firstItem) {
-                        const firstItemRect = firstItem.getBoundingClientRect();
-                        const containerRect = qualityFeatures.getBoundingClientRect();
-                        
-                        // Se o primeiro item não estiver completamente visível à esquerda
-                        if (firstItemRect.left < containerRect.left) {
-                            firstItem.scrollIntoView({ 
-                                behavior: 'auto', 
-                                inline: 'start',
-                                block: 'nearest'
-                            });
-                        }
-                    }
-                }, 50);
-            }, 100);
-        };
+        // Apenas aplicar o grid, não o carrossel automático
+        if (window.innerWidth <= 768) {
+            // Remove qualquer estilo de carrossel anterior
+            qualityFeatures.style.display = 'grid';
+            qualityFeatures.style.overflowX = 'visible';
+            qualityFeatures.style.scrollSnapType = 'none';
+            qualityFeatures.style.scrollBehavior = 'auto';
+            
+            // Limpa qualquer intervalo existente
+            if (window.qualityScrollInterval) {
+                clearInterval(window.qualityScrollInterval);
+                window.qualityScrollInterval = null;
+            }
+            
+            return;
+        }
         
-        // Executar assim que o carrossel estiver pronto
-        ensureFirstImageVisible();
-        
-        // Também executar quando a janela for redimensionada
-        window.addEventListener('resize', ensureFirstImageVisible);
-        
-        // Seu código original para o carrossel automático
+        // Para desktop, mantém o comportamento original se necessário
         let scrollInterval = setInterval(() => {
             const itemWidth = document.querySelector('.quality-item').offsetWidth + 15;
             const maxScroll = qualityFeatures.scrollWidth - qualityFeatures.clientWidth;
@@ -717,6 +697,95 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Nova função para Produtos Relacionados em mobile - PRIMEIRO ITEM CENTRALIZADO
+    function setupRelatedProductsCarousel() {
+        if (window.innerWidth > 768) return;
+        
+        const relatedGrid = document.querySelector('.related-product-grid');
+        if (!relatedGrid) return;
+        
+        // Configura o carrossel manual (sem auto-scroll)
+        relatedGrid.style.overflowX = 'auto';
+        relatedGrid.style.scrollSnapType = 'x mandatory';
+        relatedGrid.style.scrollBehavior = 'smooth';
+        relatedGrid.style.cursor = 'grab';
+        
+        // Forçar scroll para o primeiro item centralizado após um pequeno delay
+        setTimeout(() => {
+            if (relatedGrid.scrollLeft === 0) {
+                const firstItem = relatedGrid.querySelector('.related-product-item');
+                if (firstItem) {
+                    const containerWidth = relatedGrid.clientWidth;
+                    const itemWidth = firstItem.offsetWidth;
+                    const scrollPosition = (itemWidth - containerWidth) / 2;
+                    relatedGrid.scrollLeft = scrollPosition > 0 ? scrollPosition : 0;
+                }
+            }
+        }, 100);
+        
+        // Adiciona suporte a swipe/touch
+        let isDragging = false;
+        let startX = 0;
+        let scrollLeft = 0;
+        
+        relatedGrid.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.pageX - relatedGrid.offsetLeft;
+            scrollLeft = relatedGrid.scrollLeft;
+            relatedGrid.style.cursor = 'grabbing';
+        });
+        
+        relatedGrid.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            startX = e.touches[0].pageX - relatedGrid.offsetLeft;
+            scrollLeft = relatedGrid.scrollLeft;
+        });
+        
+        relatedGrid.addEventListener('mouseleave', () => {
+            isDragging = false;
+            relatedGrid.style.cursor = 'grab';
+        });
+        
+        relatedGrid.addEventListener('mouseup', () => {
+            isDragging = false;
+            relatedGrid.style.cursor = 'grab';
+        });
+        
+        relatedGrid.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+        
+        relatedGrid.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.pageX - relatedGrid.offsetLeft;
+            const walk = (x - startX) * 2;
+            relatedGrid.scrollLeft = scrollLeft - walk;
+        });
+        
+        relatedGrid.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const x = e.touches[0].pageX - relatedGrid.offsetLeft;
+            const walk = (x - startX) * 2;
+            relatedGrid.scrollLeft = scrollLeft - walk;
+        });
+        
+        // Ajustar scroll após redimensionamento
+        window.addEventListener('resize', () => {
+            if (window.innerWidth <= 768) {
+                setTimeout(() => {
+                    const firstItem = relatedGrid.querySelector('.related-product-item');
+                    if (firstItem && relatedGrid.scrollLeft === 0) {
+                        const containerWidth = relatedGrid.clientWidth;
+                        const itemWidth = firstItem.offsetWidth;
+                        const scrollPosition = (itemWidth - containerWidth) / 2;
+                        relatedGrid.scrollLeft = scrollPosition > 0 ? scrollPosition : 0;
+                    }
+                }, 100);
+            }
+        });
+    }
+
     // Expor a função globalmente para acesso externo
     window.setupFooterAccordion = setupFooterAccordion;
 
@@ -729,6 +798,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setupContactForm();
     setupBuyNowButtons();
     setupQualityCarousel();
+    setupRelatedProductsCarousel();
     setupFooterAccordion();
     
     // Reconfigurar ao redimensionar a janela
@@ -739,6 +809,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setupBenefitsCarousel();
         setupTestimonialsCarousel();
         setupQualityCarousel();
+        setupRelatedProductsCarousel();
         
         // Footer accordion no resize
         const footerCols = document.querySelectorAll('.footer-col');
